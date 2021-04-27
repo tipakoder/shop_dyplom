@@ -3,6 +3,6 @@
         "url" : "/",
         "method" : "get",
         "controller" : "front",
-        "function" : "home_page"
+        "function" : "main"
     }
 ]

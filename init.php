@@ -1,6 +1,6 @@
 <?php
 
-use Exception;
+// use \Exception;
 
 const ROOTDIR = __DIR__;
 

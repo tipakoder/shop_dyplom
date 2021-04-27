@@ -4,7 +4,7 @@ function load_config($name){
     $path = ROOTDIR."/config/{$name}.json";
 
     if(file_exists($path)){
-        return json_decode($path, true);
+        return json_decode(file_get_contents($path), true);
     }
     return false;
 }

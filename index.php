@@ -5,7 +5,7 @@ require_once "init.php";
 try{
     $route = false;
 
-    if(strtolower($_SERVER["REQUEST_METHOD"]) === "get"){
+    if(strtolower($_SERVER["REQUEST_METHOD"]) == "get"){
         $route = getRoute(load_config("frontRoutes"));
     } else {
         $route = getRoute(load_config("apiRoutes"));

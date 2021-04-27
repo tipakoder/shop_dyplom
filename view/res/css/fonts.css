@@ -1,0 +1,28 @@
+@font-face{
+    font-family: "Opensans";
+    font-style: normal;
+    font-weight: 400;
+    font-display: fallback;
+    src: url(/view/res/fonts/opensans/OpenSans-Regular.ttf)
+}
+@font-face{
+    font-family: "Opensans";
+    font-style: italic;
+    font-weight: 400;
+    font-display: fallback;
+    src: url(/view/res/fonts/opensans/OpenSans-Italic.ttf)
+}
+@font-face{
+    font-family: "Opensans";
+    font-style: normal;
+    font-weight: 600;
+    font-display: fallback;
+    src: url(/view/res/fonts/opensans/OpenSans-Bold.ttf)
+}
+@font-face{
+    font-family: "Opensans";
+    font-style: normal;
+    font-weight: 200;
+    font-display: fallback;
+    src: url(/view/res/fonts/opensans/OpenSans-Light.ttf)
+}
