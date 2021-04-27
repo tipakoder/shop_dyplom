@@ -1,0 +1,8 @@
+[
+    {
+        "url" : "/",
+        "method" : "post",
+        "controller" : "api",
+        "function" : ""
+    }
+]
