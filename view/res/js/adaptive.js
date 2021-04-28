@@ -17,7 +17,7 @@ function ready_adaptive(){
             navbar.style.display = "block";
             navbar.style.animationName = "cart-open";
         } else {
-            navbar.style.animationName = "cart-close";
+            navbar.style.display = "none";
         }
     });
 }

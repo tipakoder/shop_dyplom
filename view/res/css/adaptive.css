@@ -1,5 +1,9 @@
 @media (max-width: 600px) {
     /* BASE */
+    body{
+        margin-top: 77px;
+    }
+
     .container{
         min-width: 100%;
         padding: 0 8px;
@@ -7,17 +11,14 @@
 
     /* HEADER WRAPPER */
     #header-wrapper{
-        position: fixed;
-        top: 0;
         bottom: 0;
-        left: 0;
-        right: 0;
         background-color: transparent;
     }
 
     #header-wrapper .header-logotype{
         background-color: #fff;
         border-bottom: 1px solid #eee;
+        padding: 16px;
     }
 
     #header-wrapper .header-adaptive-close{
@@ -39,6 +40,7 @@
         background-color: #fff;
         animation: cart-open 0.3s;
         display: none;
+        padding-top: 32px;
     }
 
     #header-wrapper .header-navigation ul{
@@ -77,5 +79,13 @@
         left: 8px;
         right: 8px;
         animation: none;
+    }
+
+    /* MAIN WRAPPER */
+
+    /* COMPONENTS */
+
+    .catalog-container{
+        grid-template-columns: auto !important;
     }
 }

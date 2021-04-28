@@ -58,3 +58,10 @@ function send_answer($data = [], $type = false){
 function load_error($code, $more = null){
     load_view("", "Ошибка {$code}", ["code" => $code, "more" => $more], "error");
 }
+
+function upload_file($path, $file){
+    if (move_uploaded_file($file['tmp_name'], ROOTDIR.$path)) {
+        return true;
+    }
+    return false;
+}

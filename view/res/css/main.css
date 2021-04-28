@@ -4,7 +4,7 @@
     border: 0;
     outline: 0;
     box-sizing: border-box;
-    font-family: 'Opensans', sans-serif;
+    font-family: 'Panton', sans-serif;
 }
 
 .container{
@@ -27,7 +27,7 @@ textarea{
 }
 
 .button{
-    background-color: #fff;
+    background-color: orange;
     padding: 8px 16px;
     color: #fff;
     cursor: pointer;
@@ -48,12 +48,19 @@ pre{
 
 body{
     background-color: #f1f1f1;
+    margin-top: 84px;
 }
 
 /* HEADER WRAPPER */
 
 #header-wrapper{
     background-color: #fff;
+    user-select: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
 }
 
 #header-wrapper > .container{
@@ -69,10 +76,6 @@ body{
     right: 32px;
     font-size: 32px;
     color: #333;
-}
-
-#header-wrapper > .container > *{
-    padding: 16px;
 }
 
 #header-wrapper .header-logotype{
@@ -96,8 +99,7 @@ body{
 #header-wrapper .header-navigation ul{
     display: flex;
     align-items: center;
-    grid-gap: 8px;
-    padding: 32px 0px;
+    grid-gap: 16px;
 }
 
 #header-wrapper .header-navigation ul .search{
@@ -112,6 +114,7 @@ body{
     display: flex;
     align-items: center;
     height: 100%;
+    padding: 32px 0px;
 }
 
 #header-wrapper .header-navigation ul li .name{
@@ -149,28 +152,18 @@ body{
 
 #header-wrapper .header-navigation ul .cart:hover .cart-body{
     display: flex;
-    opacity: 1;
-    animation: cart-open 0.3s;
 }
 
 #header-wrapper .header-navigation ul .cart .cart-body{
     position: absolute;
-    top: 52px;
+    top: 100%;
     right: 0;
     background-color: #fff;
     box-shadow: 0px 6px 6px rgba(0,0,0,0.08);
     border-radius: 4px;
     border: 1px solid #ccc;
-    width: 500px;
-    height: 350px;
-    padding: 16px;
     display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s;
-    animation: cart-close 0.3s;
+    animation: cart-open 0.3s;
 }
 
 #header-wrapper .header-navigation ul .cart .cart-body:hover{
@@ -184,8 +177,26 @@ body{
     flex-direction: column;
     grid-gap: 16px;
     color: #333;
+    width: 500px;
+    height: 350px;
+    padding: 16px;
 }
 
 #header-wrapper .header-navigation ul .cart .cart-body .plug-box i{
     font-size: 48px;
+}
+
+/* MAIN WRAPPER */
+
+#main-wrapper section{
+    padding: 64px 16px;
+}
+
+#main-wrapper section .section-title{
+    font-size: 22px;
+    font-weight: 600;
+}
+
+#main-wrapper section .content{
+    margin-top: 32px;
 }

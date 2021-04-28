@@ -1,0 +1,116 @@
+/* CATALOG */
+
+.catalog-container{
+    display: grid;
+    grid-template-columns: repeat(4, minmax(auto, 1fr));
+    grid-template-rows: 430px 1fr;
+    background-color: #eee;
+    grid-gap: 1px;
+}
+
+.catalog-container > .product{
+    position: relative;
+    background-color: #fff;
+    box-shadow: none;
+    transition: box-shadow 0.4s;
+    cursor: pointer;
+    height: 430px;
+    overflow: hidden;
+}
+
+.catalog-container > .product:hover{
+    box-shadow: 0px 0px 18px rgba(0,0,0,0.46);
+    height: 460px;
+    z-index: 2;
+    border-radius: 0px 0px 8px 8px;
+}
+
+.catalog-container > .product > .product-wrapper{
+    padding: 32px 20px;
+    display: flex;
+    grid-gap: 16px;
+    flex-direction: column;
+}
+
+.catalog-container > .product > .product-wrapper .image{
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 300px;
+    width: 100%;
+}
+
+.catalog-container > .product > .product-wrapper .image > .tag{
+    position: absolute;
+    top: -15px;
+    padding: 6px 8px;
+    border-radius: 4px;
+    background-color: #34A853;
+    color: #FFF;
+    left: 5px;
+    font-size: 14px;
+}
+
+.catalog-container > .product > .product-wrapper .details{
+    display: flex;
+    grid-gap: 8px;
+    flex-direction: column;
+}
+
+.catalog-container > .product > .product-wrapper .details > .name{
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+}
+
+.catalog-container > .product > .product-wrapper .details > .price{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.catalog-container > .product:hover > .product-wrapper .submenu{
+    display: block;
+}
+
+.catalog-container > .product > .product-wrapper .submenu{
+    display: none;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+}
+
+.catalog-container > .product > .product-wrapper .submenu .actions{
+    display: flex;
+}
+
+.catalog-container > .product > .product-wrapper .submenu .actions > *{
+    display: flex;
+    align-items: center;
+    grid-gap: 8px;
+    width: 100%;
+    transition: background-color 0.3s;
+    padding: 16px;
+}
+
+.catalog-container > .product > .product-wrapper .submenu .to_favorite{
+    background-color: #EA4335;
+}
+
+.catalog-container > .product > .product-wrapper .submenu .to_favorite:hover{
+    background-color: #c93a2c;
+}
+
+.catalog-container > .product > .product-wrapper .submenu .to_cart{
+    background-color: #FBBC05;
+}
+
+.catalog-container > .product > .product-wrapper .submenu .to_cart:hover{
+    background-color: #e9b005;
+}
+
+/* BEST DEALS */
+

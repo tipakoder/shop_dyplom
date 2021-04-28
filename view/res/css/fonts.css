@@ -1,28 +1,63 @@
+/* OpenSans */
 @font-face{
     font-family: "Opensans";
     font-style: normal;
     font-weight: 400;
     font-display: fallback;
-    src: url(/view/res/fonts/opensans/OpenSans-Regular.ttf)
+    src: url(/view/res/fonts/opensans/OpenSans-Regular.ttf);
 }
 @font-face{
     font-family: "Opensans";
     font-style: italic;
     font-weight: 400;
     font-display: fallback;
-    src: url(/view/res/fonts/opensans/OpenSans-Italic.ttf)
+    src: url(/view/res/fonts/opensans/OpenSans-Italic.ttf);
 }
 @font-face{
     font-family: "Opensans";
     font-style: normal;
     font-weight: 600;
     font-display: fallback;
-    src: url(/view/res/fonts/opensans/OpenSans-Bold.ttf)
+    src: url(/view/res/fonts/opensans/OpenSans-Bold.ttf);
 }
 @font-face{
     font-family: "Opensans";
     font-style: normal;
     font-weight: 200;
     font-display: fallback;
-    src: url(/view/res/fonts/opensans/OpenSans-Light.ttf)
+    src: url(/view/res/fonts/opensans/OpenSans-Light.ttf);
+}
+
+/* Panton */
+@font-face{
+    font-family: "Panton";
+    font-style: normal;
+    font-weight: 400;
+    font-display: fallback;
+    src: url(/view/res/fonts/panton/Panton-Regular.ttf) format("opentype"),
+         url(/view/res/fonts/panton/Panton-Regular.woff) format("woff");
+}
+@font-face{
+    font-family: "Panton";
+    font-style: italic;
+    font-weight: 400;
+    font-display: fallback;
+    src: url(/view/res/fonts/panton/Panton-RegularItalic.ttf) format("opentype"),
+         url(/view/res/fonts/panton/Panton-RegularItalic.woff) format("woff");
+}
+@font-face{
+    font-family: "Panton";
+    font-style: normal;
+    font-weight: 600;
+    font-display: fallback;
+    src: url(/view/res/fonts/panton/Panton-Bold.ttf) format("opentype"),
+         url(/view/res/fonts/panton/Panton-Bold.woff) format("woff");
+}
+@font-face{
+    font-family: "Panton";
+    font-style: normal;
+    font-weight: 200;
+    font-display: fallback;
+    src: url(/view/res/fonts/panton/Panton-Light.ttf) format("opentype"),
+         url(/view/res/fonts/panton/Panton-Light.woff) format("woff");
 }

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/view/res/css/animation.css">
     <link rel="stylesheet" href="/view/res/css/main.css">
     <link rel="stylesheet" href="/view/res/css/adaptive.css">
+    <link rel="stylesheet" href="/view/res/css/template.css">
 </head>
 <body>
     <header id="header-wrapper">
@@ -55,11 +56,11 @@
     </header>
 
     <main id="main-wrapper">
-    
+        <?php require_once "pages/{$SYS_PAGE}.php"; ?>
     </main>
 
     <footer id="footer-wrapper">
-    
+
     </footer>
 
     <script src="/view/res/js/adaptive.js"></script>
