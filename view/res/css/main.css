@@ -49,6 +49,28 @@ pre{
 body{
     background-color: #f1f1f1;
     margin-top: 84px;
+    overflow: hidden;
+}
+
+/* COMPONENT LOADING */
+
+#loading-page{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+#loading-page > i{
+    font-size: 36px;
+    animation: spinner 1s infinite;
 }
 
 /* HEADER WRAPPER */
@@ -195,6 +217,28 @@ body{
 #main-wrapper section .section-title{
     font-size: 22px;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#main-wrapper section .section-title > .submenu{
+    display: flex;
+    align-items: center;
+    grid-gap: 16px;
+}
+
+#main-wrapper section .section-title > .submenu li{
+    color: #666;
+    font-size: 16px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    padding: 8px 0;
+    transition: border 0.3s;
+}
+
+#main-wrapper section .section-title > .submenu li.selected{
+    border-bottom: 2px solid orange;
 }
 
 #main-wrapper section .content{

@@ -112,5 +112,11 @@
     background-color: #e9b005;
 }
 
+.catalog-container > .product > .product-wrapper .submenu .close{
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
 /* BEST DEALS */
 

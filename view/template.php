@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="/view/res/css/template.css">
 </head>
 <body>
+    <div id="loading-page">
+        <i class="fas fa-spinner"></i>
+    </div>
+
     <header id="header-wrapper">
         <div id="header-nav-button" class="header-adaptive-close"><i class="fas fa-bars"></i></div>
 
@@ -63,6 +67,7 @@
 
     </footer>
 
-    <script src="/view/res/js/adaptive.js"></script>
+    <script src="/view/res/js/main.js"></script>
+    <script src="/view/res/js/catalog.js"></script>
 </body>
 </html>

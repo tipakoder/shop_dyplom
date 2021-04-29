@@ -11,8 +11,8 @@
 
     /* HEADER WRAPPER */
     #header-wrapper{
-        bottom: 0;
         background-color: transparent;
+        width: 100%;
     }
 
     #header-wrapper .header-logotype{
@@ -27,8 +27,8 @@
 
     #header-wrapper > .container{
         flex-direction: column;
-        height: 100%;
         padding: 0;
+        height: 100%;
     }
 
     #header-wrapper > .container > *{
@@ -36,10 +36,10 @@
     }
 
     #header-wrapper .header-navigation{
-        height: 100%;
         background-color: #fff;
         animation: cart-open 0.3s;
         display: none;
+        height: 100%;
         padding-top: 32px;
     }
 
@@ -83,9 +83,39 @@
 
     /* MAIN WRAPPER */
 
+    #main-wrapper section .section-title{
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        grid-gap: 16px;
+    }
+
     /* COMPONENTS */
 
     .catalog-container{
         grid-template-columns: auto !important;
+    }
+
+    .catalog-container > .product.showing_adaptive{
+        position: fixed;
+        top: 71px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        z-index: 50;
+    }
+
+    .catalog-container > .product.showing_adaptive:hover{
+        height: 100%;
+    }
+
+    .catalog-container > .product.showing_adaptive .submenu{
+        display: block !important;
+        bottom: 71px !important;
+    }
+
+    .catalog-container > .product.showing_adaptive .submenu .close{
+        display: flex !important;
     }
 }

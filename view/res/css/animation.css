@@ -7,3 +7,8 @@
     0%{ transform: translateY(0%); opacity: 1; display: block; } 
     100%{ transform: translateY(5%); opacity: 0; display: block; }
 }
+
+@keyframes spinner {
+    0%{transform: rotate(0deg);}
+    100%{transform: rotate(360deg);}
+}
