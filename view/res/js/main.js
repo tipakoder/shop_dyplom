@@ -21,7 +21,7 @@ function ready_adaptive(){
     // Setup catalog component
     let products = document.querySelectorAll(".catalog-container > .product");
     for(let product of products){
-        product.addEventListener("click", open_adaptive_product);
+        product.addEventListener("click", click_product);
     }
     // Setup section submenu
     let submenus = document.querySelectorAll("section .section-title .submenu");
@@ -46,17 +46,38 @@ function resize_window(){
     }
 }
 
-function open_adaptive_product(e){
+function click_product(e){
     e.preventDefault();
-    console.log(e.target);
-    if(window.innerWidth <= 600){
-        if(e.target === this.querySelector(".submenu .close")){
-            this.classList.remove("showing_adaptive");
+    if(e.target !== this.querySelector(".submenu .to_favorite") && e.target !== this.querySelector(".submenu .to_cart")){
+        if(window.innerWidth <= 600){
+            if(e.target === this.querySelector(".submenu .close")){
+                this.classList.remove("showing_adaptive");
+            } else {
+                this.classList.add("showing_adaptive");
+            }
         } else {
-            this.classList.add("showing_adaptive");
+            
+        }
+    } else {
+        switch(e.target){
+            case this.querySelector(".submenu .to_favorite"):
+
+                break;
+            case this.querySelector(".submenu .to_cart"):
+                break;
         }
     }
 }
+
+function catalog_add_favorite(product){
+
+}
+
+function catalog_add_cart(product){
+
+}
+
+function cart_update
 
 document.addEventListener("DOMContentLoaded", ready_adaptive);
 window.addEventListener("load", () => {

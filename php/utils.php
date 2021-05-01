@@ -11,7 +11,11 @@ function load_config($name){
 
 function load_controller($route){
     require_once ROOTDIR."/controller/{$route["controller"]}.php";
-    call_user_func($route["function"], []);
+    if(function_exists($route["function"])){
+        call_user_func($route["function"], []);
+    } else {
+        load_error(422, "Метода не существует");
+    }
 }
 
 function load_view($view, $title, $params = [], $template = "template"){
