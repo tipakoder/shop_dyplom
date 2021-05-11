@@ -13,6 +13,7 @@
             border: 0;
             outline: 0;
             box-sizing: border-box;
+            font-family: Panton;
         }
 
         #wrapper{
@@ -29,14 +30,12 @@
         }
 
         .code{
-            font-family: Montserrat-Bold;
             font-size: 72px;
-            font-weight: 400;
+            font-weight: 600;
             color: #000;
         }
 
         .codeinfo{
-            font-family: Montserrat-Light;
             font-size: 16px;
             font-weight: 400;
             color: #000;

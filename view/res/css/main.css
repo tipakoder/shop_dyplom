@@ -105,6 +105,11 @@ body{
     align-items: center;
 }
 
+#header-wrapper .header-logotype .symbol{
+    font-size: 36px;
+    font-weight: 600;
+}
+
 #header-wrapper .header-logotype .text{
     margin-left: 16px;
 }
@@ -208,10 +213,75 @@ body{
     font-size: 48px;
 }
 
+#header-wrapper .header-navigation ul .cart .cart-body .content{
+    display: none;
+}
+
+#header-wrapper .header-navigation ul .cart .cart-body .content ul{
+    flex-direction: column;
+    grid-gap: 8px;
+    height: auto;
+}
+
+#header-wrapper .header-navigation ul .cart .cart-body .content .cart-slot{
+    display: flex;
+    align-items: flex-start;
+    grid-gap: 16px;
+    padding: 8px;
+}
+
+#header-wrapper .header-navigation ul .cart .cart-body .content .cart-slot .image{
+    max-width: 200px;
+}
+
+#header-wrapper .header-navigation ul .cart .cart-body .content .cart-slot .body-wrapper{
+    display: flex;
+    flex-direction: column;
+    grid-gap: 16px;
+    color: #666;
+    min-width: 200px;
+}
+
+#header-wrapper .header-navigation ul .cart .cart-body .content .cart-slot .body-wrapper .product-name{
+    font-size: 22px;
+    color: #000;
+}
+
+#header-wrapper .header-navigation ul .cart .cart-body .content .cart-slot .body-wrapper .product-price{
+    font-size: 16px;
+}
+
+#header-wrapper .header-navigation ul .cart .cart-body .content .cart-slot .slot-remove{
+    cursor: pointer;
+    color: #000;
+    font-size: 16px;
+}
+
+#header-wrapper .header-navigation ul .cart .cart-body .content .open-cart{
+    display: block;
+    width: 100%;
+    height: 45px;
+    padding: 8px 16px;
+    text-align: center;
+    border-top: 1px solid #ececec;
+    color: #333;
+    transition: 0.3s background-color, 0.3s color;
+}
+
+#header-wrapper .header-navigation ul .cart .cart-body .content .open-cart:hover{
+    background-color: orange;
+    color: #FFF;
+}
+
 /* MAIN WRAPPER */
 
 #main-wrapper section{
-    padding: 64px 16px;
+    padding: 32px 0px;
+    border-bottom: 1px solid #ececec;
+}
+
+#main-wrapper section.background{
+    background-color: #fafafa;
 }
 
 #main-wrapper section .section-title{

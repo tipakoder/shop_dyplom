@@ -10,8 +10,8 @@
         </div>
 
         <div class="content catalog-container">
-            <?php for($i = 0; $i < 6; $i++): ?>
-            <div class="product">
+            <?php for($i = 0; $i < 8; $i++): ?>
+            <div class="product" data-product='{"id": "1", "name": "Бейсболка 5.11", "price": "490", "photo": "/view/res/img/image.jpg"}'>
                 <div class="product-wrapper">
                     <div class="image" style="background-image: url(/view/res/img/image.jpg);">
                         <p class="tag new">Новинка</p>
@@ -30,6 +30,25 @@
                 </div>
             </div>
             <?php endfor; ?>
+        </div>
+    </div>
+</section>
+
+<section id="previously-watched" class="background">
+    <div class="container">
+        <div class="section-title">Ранее вы смотрели</div>
+        <div class="content">
+            <div class="hover-block">
+                <div class="inner-wrapper">
+                    <img src="/view/res/img/recently_watched.jpg" alt="" class="image">
+                    <div class="text">
+                        <h5 class="name">Худи</h5>
+                        <p class="price">2 399 руб./шт</p>
+                    </div>
+                </div>
+            </div>
+            <div class="block"></div>
+            <div class="block"></div>
         </div>
     </div>
 </section>

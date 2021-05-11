@@ -4,5 +4,12 @@
         "method" : "get",
         "controller" : "front",
         "function" : "main"
+    },
+
+    {
+        "url" : "/cart/",
+        "method" : "get",
+        "controller" : "front",
+        "function" : "cart"
     }
 ]

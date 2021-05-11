@@ -1,12 +1,16 @@
 @media (max-width: 600px) {
     /* BASE */
+    html{
+        /* width: 100%; */
+    }
+
     body{
         margin-top: 77px;
+        /* width: 100%; */
     }
 
     .container{
-        min-width: 100%;
-        padding: 0 8px;
+        padding: 0 16px;
     }
 
     /* HEADER WRAPPER */
@@ -74,14 +78,29 @@
         display: flex;
         width: auto;
         height: auto;
-        bottom: 0;
+        bottom: 0px;
         top: 52px;
-        left: 8px;
-        right: 8px;
+        left: 0px;
+        right: 0px;
+        border-radius: 0px;
+        border: 0px;
+        border-top: 1px solid #eeeff1;
         animation: none;
     }
 
+    #header-wrapper .header-navigation ul .cart .cart-body > .plug-box{
+        height: 100%;
+    }
+
+    #header-wrapper .header-navigation ul .cart .cart-body .content .cart-slot .image{
+        max-width: 116px;
+    }
+
     /* MAIN WRAPPER */
+
+    #main-wrapper{
+        width: 100%;
+    }
 
     #main-wrapper section .section-title{
         flex-direction: column;
@@ -94,6 +113,18 @@
 
     .catalog-container{
         grid-template-columns: auto !important;
+    }
+
+    .catalog-container > .product{
+        margin-bottom: 0px !important;
+    }
+    
+    .catalog-container > .product:hover{
+        border-radius: 0px !important;
+    }
+
+    .catalog-container > .product:hover .submenu{
+        display: none !important;
     }
 
     .catalog-container > .product.showing_adaptive{
@@ -117,5 +148,25 @@
 
     .catalog-container > .product.showing_adaptive .submenu .close{
         display: flex !important;
+    }
+
+    /* PREVIOUSLY WATCHED */
+
+    #previously-watched .content{
+        display: grid;
+        grid-gap: 16px;
+        grid-template-columns: auto !important;
+    }
+
+    #previously-watched .content > .block{
+        width: 100%;
+        background: #eeeff1;
+        border-radius: 3px;
+        height: 142px;
+    }
+
+    #previously-watched .content > .hover-block > .inner-wrapper{
+        display: flex;
+        grid-gap: 16px;
     }
 }

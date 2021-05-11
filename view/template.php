@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,7 +22,7 @@
 
         <div class="container">
             <div class="header-logotype">
-                <h1 class="symbol">SHOP</h1>
+                <a href="/" class="symbol">SHOP</a>
                 <p class="text">интернет-магазин<br>одежды и аксессуаров</p>
             </div>
 
@@ -39,18 +39,22 @@
                     <li>
                         <h3 class="name">Избранное</h3>
                         <i class="fas fa-heart"></i>
-                        <p class="count">0</p>
+                        <p class="count" id="favorite-count-text">0</p>
                     </li>
                     <li class="cart">
                         <div class="li-body">
                             <h3 class="name">Корзина</h3>
                             <i class="fas fa-shopping-cart"></i>
-                            <p class="count">0</p>
+                            <p class="count" id="cart-count-text">0</p>
                         </div>
-                        <div class="cart-body">
+                        <div class="cart-body" id="cart-body">
                             <div class="plug-box">
                                 <i class="fas fa-shopping-cart"></i>
                                 <p class="text">Ваша корзина пуста</p>
+                            </div>
+                            <div class="content">
+                                <ul></ul>
+                                <a href="/cart/" class="open-cart">Перейти в корзину</a>
                             </div>
                         </div>
                     </li>
