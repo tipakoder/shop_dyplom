@@ -144,6 +144,11 @@ body{
     padding: 32px 0px;
 }
 
+#header-wrapper .header-navigation ul li a{
+    display: flex;
+    align-items: center;
+}
+
 #header-wrapper .header-navigation ul li .name{
     display: none;
     margin-right: 16px;
@@ -313,4 +318,119 @@ body{
 
 #main-wrapper section .content{
     margin-top: 32px;
+}
+
+/* FOOTER WRAPPER */
+
+#footer-wrapper{
+    background-color: #4D4D4D;
+    color: #fff;
+    padding: 32px;
+}
+
+#footer-wrapper .container{
+    display: flex;
+    justify-content: space-between;
+}
+
+#footer-wrapper .column{
+    display: flex;
+    flex-direction: column;
+    grid-gap: 8px;
+}
+
+#footer-wrapper .column.logotype{
+    justify-content: center;
+}
+
+#footer-wrapper .column.logotype .text{
+    font-size: 18px;
+    color: #E2E2E2;
+}
+
+#footer-wrapper .column.social-icons{
+    flex-direction: row;
+}
+
+#footer-wrapper .column.social-icons .icon{
+    padding: 8px;
+    border: 1px solid #7C7C7C;
+    color: #6F6F6F;
+    border-radius: 100%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s color, 0.3s border;
+}
+
+#footer-wrapper .column.social-icons .icon:hover{
+    border: 1px solid #A1A1A1;
+    color: #A5A5A5;
+}
+
+#footer-wrapper .column.contacts i{
+    margin-right: 8px;
+}
+
+#footer-wrapper .column.contacts .text{
+    display: flex;
+    align-items: center;
+}
+
+/* FORM CONTENT */
+
+.form-content{
+    display: flex;
+    flex-direction: column;
+    min-width: 400px;
+    grid-gap: 8px;
+}
+
+.form-content .field{
+    border-radius: 4px;
+    border: 1px solid #E2E2E2;
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+}
+
+.form-content .field input{
+    padding: 10px;
+    width: 100%;
+}
+
+.form-content .btn{
+    background-color: #FFF;
+    border-radius: 4px;
+    border: 1px solid orange;
+    color: orange;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.3s background, 0.3s color, 0.3s border;
+}
+
+.form-content .btn:hover{
+    background-color: orange;
+    color: #FFF;
+}
+
+.form-content .btn.filled{
+    background-color: orange;
+    color: #FFF;
+    border: none;
+    padding: 10px;
+}
+
+.form-content .btn.filled:hover{
+    background-color: #FFCD6F;
+}
+
+.form-content .form-actions{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    grid-gap: 8px;
 }

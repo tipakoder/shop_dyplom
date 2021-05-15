@@ -104,8 +104,8 @@ function catalog_add_cart(product){
 }
 
 function cart_update(){
-    let slots = JSON.parse(localStorage.getItem("catalog_cart_slots"));
-    document.getElementById("cart-count-text").textContent = slots.length;
+    let slots = tryParseJSON(localStorage.getItem("catalog_cart_slots"));
+    if(slots != null) document.getElementById("cart-count-text").textContent = slots.length;
     if(slots.length > 0){
         let contentBody = document.getElementById("cart-body").querySelector(".content").children[0];
         let contentPageBody = document.getElementById("cart-page-content");
@@ -113,38 +113,82 @@ function cart_update(){
         contentBody.innerHTML = '';
         if(contentPageBody) contentPageBody.innerHTML = '';
         for(let slot of slots){
-            let elementBody = document.createElement("div");
-            elementBody.dataset.id = slot.id;
-            elementBody.className = "cart-slot";
-            elementBody.innerHTML = `
-            <img class="image" src="${slot['photo']}" alt="">
-            <div class="body-wrapper">
-                <h5 class="product-name">${slot['name']}</h5>
-                <p class="product-price">${slot['price']} руб./шт</p>
-            </div>
-            <i class="slot-remove fas fa-times"></i>
-            `;
-
-            elementBody.querySelector(".slot-remove").addEventListener("click", function(e){
-                e.preventDefault();
-                let slots = tryParseJSON(localStorage.getItem("catalog_cart_slots"));
-                if(slots.findIndex(slt => slt.id == this.parentElement.dataset.id) !== -1) slots = slots.splice(this.parentElement.dataset.id, 1);
-                localStorage.setItem("catalog_cart_slots", JSON.stringify(slots));
-                cart_update();
-            });
-            contentBody.appendChild(elementBody);
-            if(contentPageBody) contentPageBody.appendChild(elementBody);
+            contentBody.appendChild(generate_cart_slot(slot, "catalog_cart_slots"));
+            if(contentPageBody) contentPageBody.appendChild(generate_cart_slot(slot, "catalog_cart_slots"));
         }
         document.getElementById("cart-body").querySelector(".content").style.display = "block";
     } else {
         document.getElementById("cart-body").querySelector(".plug-box").style.display = "flex";
         document.getElementById("cart-body").querySelector(".content").style.display = "none";
+        if(document.getElementById("cart-page-content")) document.getElementById("cart-page-content").innerHTML = "";
     }
 }
 
 function favorite_update(){
-    let slots = JSON.parse(localStorage.getItem("catalog_favorite_slots"));
-    document.getElementById("favorite-count-text").textContent = slots.length;
+    let slots = tryParseJSON(localStorage.getItem("catalog_favorite_slots"));
+    if(slots != null) document.getElementById("favorite-count-text").textContent = slots.length;
+
+    if(slots.length > 0){
+        let contentPageBody = document.getElementById("favorite-page-content");
+        if(contentPageBody == null) return;
+        contentPageBody.innerHTML = '';
+        for(let slot of slots){
+            contentPageBody.appendChild(generate_cart_slot(slot, "catalog_favorite_slots"));
+        }
+    } else {
+        if(document.getElementById("favorite-page-content")) document.getElementById("favorite-page-content").innerHTML = "";
+    }
+}
+
+function generate_cart_slot(slot, slots_name){
+    let elementBody = document.createElement("div");
+    elementBody.dataset.id = slot.id;
+    elementBody.className = "cart-slot";
+    elementBody.innerHTML = `
+    <img class="image" src="${slot['photo']}" alt="">
+    <div class="body-wrapper">
+        <h5 class="product-name">${slot['name']}</h5>
+        <p class="product-price">${slot['price']} руб./шт</p>
+    </div>
+    <i class="slot-remove fas fa-times"></i>
+    `;
+
+    elementBody.querySelector(".slot-remove").addEventListener("click", (e) => {
+        e.preventDefault();
+        let slots = tryParseJSON(localStorage.getItem(slots_name));
+        console.log(slots)
+        if(slots.findIndex(slt => slt.id == slot.id) !== -1) slots = slots.splice(slot.id, 1);
+        localStorage.setItem(slots_name, JSON.stringify(slots));
+        cart_update();
+        favorite_update();
+    });
+
+    return elementBody;
+}
+
+function popup_account(){
+    let form = document.createElement("form");
+    form.className = "form-content";
+    form.innerHTML = `
+    <div class="field">
+        <input type="text" placeholder="Логин" required>
+    </div>
+    <div class="field">
+        <input type="password" placeholder="Пароль" required>
+    </div>
+    <div class="form-actions">
+        <button class="btn">Регистрация</button>
+        <button class="btn filled">Войти</button>
+    </div>
+    `;
+    popup(form, "Личный кабинет");
+}
+
+function submit_form(form, url, customData = false, method = "POST"){
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        
+    });
 }
 
 document.addEventListener("DOMContentLoaded", ready_adaptive);

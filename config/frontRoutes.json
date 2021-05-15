@@ -11,5 +11,19 @@
         "method" : "get",
         "controller" : "front",
         "function" : "cart"
+    },
+
+    {
+        "url" : "/favorite/",
+        "method" : "get",
+        "controller" : "front",
+        "function" : "favorite"
+    },
+
+    {
+        "url" : "/product.(\d+)/",
+        "method" : "get",
+        "controller" : "front",
+        "function" : "favorite"
     }
 ]
