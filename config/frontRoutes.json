@@ -21,9 +21,9 @@
     },
 
     {
-        "url" : "/product.(\d+)/",
+        "url" : "/product.(\\d+)/",
         "method" : "get",
         "controller" : "front",
-        "function" : "favorite"
+        "function" : "product"
     }
 ]

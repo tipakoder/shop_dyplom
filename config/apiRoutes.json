@@ -1,8 +1,23 @@
 [
     {
-        "url" : "/",
+        "url" : "/auth/",
         "method" : "post",
         "controller" : "api",
-        "function" : ""
+        "function" : "auth",
+        "fields": [
+        	"login",
+        	"password"
+        ]
+    },
+
+    {
+        "url" : "/reg/",
+        "method" : "post",
+        "controller" : "api",
+        "function" : "reg",
+        "fields": [
+        	"login",
+        	"password"
+        ]
     }
 ]

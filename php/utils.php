@@ -11,8 +11,11 @@ function load_config($name){
 
 function load_controller($route){
     require_once ROOTDIR."/controller/{$route["controller"]}.php";
+
+    $options = ($route["options"] != null) ? [$route["options"]] : [];
+
     if(function_exists($route["function"])){
-        call_user_func($route["function"], []);
+        call_user_func($route["function"], $options);
     } else {
         load_error(422, "Метода не существует");
     }
