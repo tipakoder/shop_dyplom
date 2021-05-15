@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 27 2021 г., 17:38
--- Версия сервера: 10.3.13-MariaDB
--- Версия PHP: 7.1.22
+-- Время создания: Май 15 2021 г., 19:58
+-- Версия сервера: 8.0.19
+-- Версия PHP: 8.0.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -29,12 +28,19 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `account` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `type` enum('admin','user') NOT NULL DEFAULT 'user',
   `name` varchar(60) NOT NULL,
   `login` varchar(60) NOT NULL,
   `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `account`
+--
+
+INSERT INTO `account` (`id`, `type`, `name`, `login`, `password`) VALUES
+(1, 'admin', 'Администратор', 'admin', '$2y$10$o6pov5fFw3uPi6QRXU/fKONfjiRWwYmPmd5gOtk/WVzleN.i/9cvi');
 
 -- --------------------------------------------------------
 
@@ -43,12 +49,13 @@ CREATE TABLE `account` (
 --
 
 CREATE TABLE `account_session` (
-  `id` int(11) NOT NULL,
-  `account_id` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `account_id` int NOT NULL,
   `sessionkey` varchar(255) NOT NULL,
-  `timestamp` int(11) NOT NULL,
-  `active` int(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `timestamp` int NOT NULL,
+  `ip` varchar(45) NOT NULL,
+  `active` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -57,9 +64,9 @@ CREATE TABLE `account_session` (
 --
 
 CREATE TABLE `category` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(120) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -68,12 +75,12 @@ CREATE TABLE `category` (
 --
 
 CREATE TABLE `product` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(120) NOT NULL,
   `photo` varchar(120) NOT NULL,
   `description` text NOT NULL,
-  `price` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `price` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -82,9 +89,9 @@ CREATE TABLE `product` (
 --
 
 CREATE TABLE `product_category` (
-  `product_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `product_id` int NOT NULL,
+  `category_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -93,10 +100,10 @@ CREATE TABLE `product_category` (
 --
 
 CREATE TABLE `product_color` (
-  `id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `product_id` int NOT NULL,
   `name` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -105,10 +112,10 @@ CREATE TABLE `product_color` (
 --
 
 CREATE TABLE `product_photo` (
-  `id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `product_id` int NOT NULL,
   `path` varchar(120) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Индексы сохранённых таблиц
@@ -168,37 +175,37 @@ ALTER TABLE `product_photo`
 -- AUTO_INCREMENT для таблицы `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `account_session`
 --
 ALTER TABLE `account_session`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `product_color`
 --
 ALTER TABLE `product_color`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `product_photo`
 --
 ALTER TABLE `product_photo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
