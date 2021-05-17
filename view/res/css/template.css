@@ -3,17 +3,8 @@
 .catalog-container{
     display: grid;
     grid-template-columns: repeat(4, minmax(auto, 1fr));
-    grid-template-rows: 430px 1fr;
     background-color: #eee;
     grid-gap: 1px;
-}
-
-.catalog-container > .product:nth-child(4n+1):nth-last-child(-n+4){
-    margin-bottom: 30px;
-}
-
-.catalog-container > .product:hover:nth-child(4n+1):nth-last-child(-n+4){
-    margin-bottom: 0px;
 }
 
 .catalog-container > .product{
@@ -22,15 +13,12 @@
     box-shadow: none;
     transition: box-shadow 0.4s;
     cursor: pointer;
-    height: 430px;
     overflow: hidden;
 }
 
 .catalog-container > .product:hover{
     box-shadow: 0px 0px 18px rgba(0,0,0,0.46);
-    height: 460px;
     z-index: 2;
-    border-radius: 0px 0px 8px 8px;
 }
 
 .catalog-container > .product > .product-wrapper{
@@ -38,6 +26,7 @@
     display: flex;
     grid-gap: 16px;
     flex-direction: column;
+    height: 100%;
 }
 
 .catalog-container > .product > .product-wrapper .image{
@@ -77,53 +66,34 @@
     font-weight: 600;
 }
 
-.catalog-container > .product:hover > .product-wrapper .submenu{
-    display: block;
-}
-
 .catalog-container > .product > .product-wrapper .submenu{
-    display: none;
-
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #fff;
+    margin-top: auto;
 }
 
 .catalog-container > .product > .product-wrapper .submenu .actions{
     display: flex;
-}
-
-.catalog-container > .product > .product-wrapper .submenu .actions > *{
-    display: flex;
-    align-items: center;
+    flex-direction: column;
     grid-gap: 8px;
-    width: 100%;
-    transition: background-color 0.3s;
-    padding: 16px;
 }
 
-.catalog-container > .product > .product-wrapper .submenu .to_favorite{
-    background-color: #EA4335;
+.catalog-container > .product > .product-wrapper .submenu .actions i{
+    margin-right: 4px;
 }
 
-.catalog-container > .product > .product-wrapper .submenu .to_favorite:hover{
-    background-color: #c93a2c;
-}
-
-.catalog-container > .product > .product-wrapper .submenu .to_cart{
-    background-color: #FBBC05;
-}
-
-.catalog-container > .product > .product-wrapper .submenu .to_cart:hover{
-    background-color: #e9b005;
-}
-
-.catalog-container > .product > .product-wrapper .submenu .close{
+.catalog-container > .product > .product-wrapper .submenu .actions .close{
     display: none;
+    position: absolute;
+    left: 0;
+    bottom: 71px;
+    right: 0;
+    width: 100%;
+    border-radius: 0px !important;
     align-items: center;
     justify-content: center;
+}
+
+.catalog-container > .product > .product-wrapper .submenu .actions .close i{
+    margin-right: 8px;
 }
 
 /* HOVER BLOCK */
@@ -220,7 +190,93 @@
 /* PRODUCT PAGE */
 
 #product-page .content{
+    background-color: #fff;
+    padding: 32px;
     display: flex;
     grid-gap: 16px;
-    align-items: flex-start;
+}
+
+#product-page .slider-wrapper{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 120px;
+    grid-gap: 8px;
+    max-width: 435px;
+    width: 100%;
+}
+
+#product-page .slider-wrapper .active-slide{
+    content: '';
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 5;
+
+    background-size: cover;
+    background-position: center;
+}
+
+#product-page .slider-wrapper .slide{
+    content: '';
+    padding: 16px;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+}
+
+#product-page .slider-wrapper .slide.selected{
+    border: 4px solid #808080;
+}
+
+#product-page .content .main-info{
+
+}
+
+/* PROFILE PAGE */
+
+#profile .userbox{
+    background-color: #fff;
+    padding: 32px;
+    border-radius: 4px;
+
+    display: flex;
+    grid-gap: 32px;
+}
+
+#profile .userbox i{
+    margin-right: 4px;
+}
+
+#profile .userbox .avatar{
+    max-height: 200px;
+    border-radius: 4px;
+}
+
+#profile .userbox .name{}
+
+#profile .userbox .subinfo{
+    font-size: 16px;
+    color: #808080;
+}
+
+#profile .userbox .column{
+    display: flex;
+    flex-direction: column;
+    grid-gap: 16px;
+}
+
+#profile .userbox .column.maininfo{
+    grid-gap: 8px;
+}
+
+/* POPUP FORM PRODUCT */
+
+.form-content.new-product{
+    min-width: 600px;
+}
+
+/* PRODUCTS ADMIN */
+
+#products-admin .product-image{
+    max-height: 150px;
 }

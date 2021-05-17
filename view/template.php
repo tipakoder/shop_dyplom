@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -24,7 +23,7 @@
 
             <div class="container">
                 <div class="header-logotype">
-                    <a href="/" class="symbol">SHOP</a>
+                    <a href="<?php echo ($SYS_LEVELACCESS > 0) ? "/" : "/admin/";?>" class="symbol">SHOP</a>
                     <p class="text">интернет-магазин<br>одежды и аксессуаров</p>
                 </div>
 
@@ -34,10 +33,12 @@
                             <h3 class="name">Поиск</h3>
                             <i class="fas fa-search"></i>
                         </li>
-                        <li onclick="popup_account()">
+                        <li onclick="<?php if(!$AUTH){echo 'popup_auth()';}else{echo "location.href='/profile/';";}?>">
                             <h3 class="name">Личный кабинет</h3>
                             <i class="fas fa-user-circle"></i>
                         </li>
+
+                        <?php if($SYS_LEVELACCESS > 0){ ?>
                         <li>
                             <a href="/favorite/">
                                 <h3 class="name">Избранное</h3>
@@ -62,6 +63,16 @@
                                 </div>
                             </div>
                         </li>
+                        <?php } ?>
+
+                        <?php if($AUTH == true): ?>
+                            <li>
+                                <a href="/logout/">
+                                    <h3 class="name">Выйти</h3>
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </nav>
             </div>
@@ -95,5 +106,11 @@
     <script src="/view/res/js/popup.js"></script>
     <script src="/view/res/js/main.js"></script>
     <script src="/view/res/js/catalog.js"></script>
+    <?php if($AUTH){ ?>
+        <script src="/view/res/js/user.js"></script>
+    <?php } ?>
+    <?php if($SYS_LEVELACCESS == 0){ ?>
+        <script src="/view/res/js/admin.js"></script>
+    <?php } ?>
 </body>
 </html>

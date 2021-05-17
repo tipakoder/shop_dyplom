@@ -1,6 +1,8 @@
 (function(){
     // Функция показа модального окна
     window.popup = function(element, title){
+        // Если есть открыте модальные окна - закрываем их
+        if(document.getElementById("popup-wrapper")) document.getElementById("popup-wrapper").remove();
         // Создаём элемент модального окна
         let popupWrapper = document.createElement("div");
         popupWrapper.id = "popup-wrapper";

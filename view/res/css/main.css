@@ -31,6 +31,7 @@ textarea{
     padding: 8px 16px;
     color: #fff;
     cursor: pointer;
+    border-radius: 4px;
 }
 
 a{
@@ -196,6 +197,8 @@ body{
     border: 1px solid #ccc;
     display: none;
     animation: cart-open 0.3s;
+    overflow-y: auto;
+    max-height: 50vh;
 }
 
 #header-wrapper .header-navigation ul .cart .cart-body:hover{
@@ -280,6 +283,10 @@ body{
 
 /* MAIN WRAPPER */
 
+#main-wrapper{
+    min-height: calc(100% - 110px);
+}
+
 #main-wrapper section{
     padding: 32px 0px;
     border-bottom: 1px solid #ececec;
@@ -317,7 +324,7 @@ body{
 }
 
 #main-wrapper section .content{
-    margin-top: 32px;
+    margin-top: 16px;
 }
 
 /* FOOTER WRAPPER */
@@ -326,6 +333,7 @@ body{
     background-color: #4D4D4D;
     color: #fff;
     padding: 32px;
+    height: 110px;
 }
 
 #footer-wrapper .container{
@@ -389,7 +397,27 @@ body{
     grid-gap: 8px;
 }
 
-.form-content .field{
+.form-content .form-actions{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    grid-gap: 8px;
+}
+
+.field-wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 8px;
+}
+
+.field-wrapper .column{
+    display: flex;
+    flex-direction: column;
+    grid-gap: 8px;
+}
+
+.field{
+    position: relative;
     border-radius: 4px;
     border: 1px solid #E2E2E2;
     display: flex;
@@ -397,12 +425,53 @@ body{
     width: 100%;
 }
 
-.form-content .field input{
-    padding: 10px;
-    width: 100%;
+.field label{
+    position: absolute;
+    top: -8px;
+    color: #808080;
+    font-size: 12px;
 }
 
-.form-content .btn{
+.field input,
+.field textarea,
+.field select{
+    padding: 10px;
+    width: 100%;
+    font-size: 14px;
+}
+
+.field.image{
+    position: relative;
+    border-radius: 4px;
+    border: 1px solid #DDDDDD;
+    color:  #808080;
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    min-height: 200px;
+    background-color: #E2E2E2;
+
+    background-size: cover;
+    background-position: center;
+}
+
+.field.image .placeholder{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.field.image input{
+    display: none;
+}
+
+.btn{
     background-color: #FFF;
     border-radius: 4px;
     border: 1px solid orange;
@@ -412,25 +481,101 @@ body{
     transition: 0.3s background, 0.3s color, 0.3s border;
 }
 
-.form-content .btn:hover{
+.btn:hover{
     background-color: orange;
     color: #FFF;
 }
 
-.form-content .btn.filled{
+.btn.filled{
     background-color: orange;
     color: #FFF;
     border: none;
     padding: 10px;
 }
 
-.form-content .btn.filled:hover{
+.btn.gray.filled{
+    background-color: #808080;
+}
+
+.btn.filled:hover{
     background-color: #FFCD6F;
 }
 
-.form-content .form-actions{
+.btn.gray.filled:hover{
+    background-color: #A2A2A2;
+}
+
+/* TABLE WRAPPER */
+
+.table-wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1px;
+}
+
+.table-wrapper .table-cell{
+    background-color: #CBCBCB;
+    padding: 16px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
-    grid-gap: 8px;
+    justify-content: center;
+    min-height: 200px;
+    grid-gap: 16px;
+    transition: 0.3s background-color;
+    cursor: pointer;
+}
+
+.table-wrapper .table-cell:hover{
+    background-color: #DDDDDD;
+}
+
+.table-wrapper .table-cell .icon{
+    font-size: 32px;
+    color: #808080;
+}
+
+.table-wrapper .table-cell .title{
+    color: #808080;
+}
+
+/* TABLE */
+
+table {
+   border: 1px solid #CBCBCB;
+   width: 100%;
+   border-collapse: collapse;
+}
+
+th {
+   border: 1px solid #CBCBCB;
+   background-color: #DDDDDD;
+   color: #808080;
+   padding: 16px;
+}
+
+th.action,
+td.action {
+    padding: 0;
+    max-width: 125px;
+    position: relative;
+}
+
+th.action button,
+td.action button{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+
+td {
+   border: 1px solid #CBCBCB;
+   background-color: #fff;
+   padding: 16px;
 }

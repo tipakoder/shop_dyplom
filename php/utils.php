@@ -12,7 +12,7 @@ function load_config($name){
 function load_controller($route){
     require_once ROOTDIR."/controller/{$route["controller"]}.php";
 
-    $options = ($route["options"] != null) ? [$route["options"]] : [];
+    $options = (isset($route["options"]) && $route["options"] != null) ? [$route["options"]] : [];
 
     if(function_exists($route["function"])){
         call_user_func($route["function"], $options);
@@ -22,13 +22,14 @@ function load_controller($route){
 }
 
 function load_view($view, $title, $params = [], $template = "template"){
-    global $level_access;
+    global $level_access, $currentUser;
 
     $extract = array_merge([
         "SYS_TITLE" => $title,
         "SYS_PAGE" => $view,
         "AUTH" => ($level_access < 2) ? true : false,
-        "SYS_LEVELACCESS" => $level_access
+        "SYS_LEVELACCESS" => $level_access,
+        "CURRENTUSER" => $currentUser
     ], $params);
 
     extract($extract);

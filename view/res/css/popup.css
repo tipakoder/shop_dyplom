@@ -1,3 +1,8 @@
+#page-wrapper{
+    height: 100%;
+    position: relative;
+}
+
 #page-wrapper.popup-active{
     filter: blur(10px);
 }
@@ -6,9 +11,8 @@
     position: fixed;
     top: 0;
     bottom: 0;
-    left: 0;
     right: 0;
-
+    left: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,6 +27,8 @@
     background-color: #fff;
     box-shadow: 0px 4px 16px rgba(0,0,0,0.394);
     padding: 32px;
+    overflow-y: auto;
+    max-height: 100vh;
 }
 
 #popup-wrapper > .popup-window > .popup-close{

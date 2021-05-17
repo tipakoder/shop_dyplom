@@ -5,14 +5,14 @@ $currentMethod = strtolower($_SERVER["REQUEST_METHOD"]);
 $currentOptions = (strtolower($_SERVER["REQUEST_METHOD"]) == "get") ? $_GET : $_POST;
 
 function getRoute($routesList){
-    global $currentMethod, $currentUrl, $level_access, $auth;
+    global $currentMethod, $currentOptions, $currentUrl, $level_access, $auth;
 
     foreach($routesList as $route){
         $route['url'] = trim($route["url"], "/");
 
-        preg_match("/^{$route['url']}$/", $currentUrl, $matches);
+        if(isset($route['regex']) && $route['regex'] == true) preg_match("/^{$route['url']}$/", $currentUrl, $matches);
 
-        if( ($route['url'] == $currentUrl || $matches != null) && strtolower($route["method"]) === $currentMethod){
+        if( ($route['url'] == $currentUrl || (isset($matches) && $matches != null)) && strtolower($route["method"]) === $currentMethod){
             if(isset($route["level_access"])){
                 if($route["level_access"] < $level_access){
                     load_error(401, "Доступ запрещён");
@@ -35,7 +35,7 @@ function getRoute($routesList){
                 }
             }
 
-            if($matches != null){
+            if(isset($matches) && $matches != null){
                 $route['options'] = $matches;
             }
 

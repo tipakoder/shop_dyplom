@@ -114,6 +114,7 @@
 
     #main-wrapper{
         width: 100%;
+        min-height: calc(100% - 209px);
     }
 
     #main-wrapper section .section-title{
@@ -121,6 +122,12 @@
         align-items: flex-start;
         justify-content: flex-start;
         grid-gap: 16px;
+    }
+
+    /* FOOTER WRAPPER */
+
+    #footer-wrapper{
+        height: 209px;
     }
 
     /* COMPONENTS */
@@ -215,5 +222,16 @@
         border-radius: 4px;
         background-color: #F3B819;
         color: #FFF !important;
+    }
+
+    /* PROFILE PAGE */
+
+    #profile .userbox{
+        flex-direction: column;
+        grid-gap: 8px;
+    }
+
+    #profile .userbox .avatar{
+        max-height: auto !important;
     }
 }
