@@ -3,7 +3,7 @@
 		<div class="section-title">
 			<h3 class="text">Товары</h3> 
 			<ul class="submenu">
-                <li><button onclick="popup_new_product()" class="btn gray filled">Новый товар</button></li>
+                <li><button onclick="popup_new_product()" class="btn gray filled"><i class="fas fa-plus"></i> Новый товар</button></li>
             </ul>
 		</div>
 

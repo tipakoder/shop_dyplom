@@ -236,3 +236,24 @@ function new_product(){
 	}
 	send_answer(["Неизвестная ошибка"]);
 }
+
+function product_sale_off(){
+	global $currentOptions;
+	$product_id = verify_field("ID", $currentOptions['id'], 1, 12);
+	if(dbExecute("UPDATE product SET on_sale = 'n' WHERE id = '{$product_id}' LIMIT 1")){
+		send_answer([], true);
+	}
+	send_answer(["Неизвестная ошибка"]);
+}
+
+function product_remove(){
+	global $currentOptions;
+	$product_id = verify_field("ID", $currentOptions['id'], 1, 12);
+	if(!removeDirectory("/content/{$product_id}/")){
+		send_answer(["Неизвестная ошибка удаления директории"]);
+	}
+	if(dbExecute("DELETE FROM product WHERE id = '{$product_id}' LIMIT 1")){
+		send_answer([], true);
+	}
+	send_answer(["Неизвестная ошибка"]);
+}

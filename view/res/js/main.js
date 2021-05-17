@@ -54,7 +54,7 @@ function ready_adaptive(){
     for(let slider of sliders_wrapper){
         for(let slide of slider.querySelectorAll(".slide")){
             slide.addEventListener("click", () => {
-                if(slide.className.match("selected")) return;
+                if(slide.className.match("selected") || slide.className.match("off")) return;
                 if(slider.querySelector(".selected")){
                     slider.querySelector(".selected").classList.remove("selected");
                 }
@@ -300,6 +300,37 @@ function submit_form(form, url, success = console.log, customData = false, metho
         });
     });
 }
+
+function search_show(){
+    let element = document.createElement("div");
+    element.id = "search-wrapper";
+    element.innerHTML = `
+    <div class="search-content">
+        <div class="block query container-fluid">
+            <div class="field">
+                <input name="query" type="text" placeholder="Что Вас интересует?">
+            </div>
+            <button class="btn gray filled">Найти</button>
+        </div>
+
+        <div class="container-fluid search-result">
+
+        </div>
+    </div>
+    `;
+    document.body.appendChild(element);
+}
+
+function search_close(){
+    if(document.getElementById("search-wrapper")) document.getElementById("search-wrapper").remove();
+}
+
+document.addEventListener("click", function(e){
+    console.log(e.target)
+    if( !e.target.closest(".search-content") && document.getElementById("search-wrapper")){
+        search_close();
+    }
+});
 
 document.addEventListener("DOMContentLoaded", ready_adaptive);
 window.addEventListener("load", () => {

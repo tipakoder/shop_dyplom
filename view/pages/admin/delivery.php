@@ -3,7 +3,7 @@
 		<div class="section-title">
 			<h3 class="text">Службы доставки</h3> 
 			<ul class="submenu">
-                <li><button onclick="popup_new_delivery_service()" class="btn gray filled">Новая служба доставки</button></li>
+                <li><button onclick="popup_new_delivery_service()" class="btn gray filled"><i class="fas fa-plus"></i> Новая служба доставки</button></li>
             </ul>
 		</div>
 

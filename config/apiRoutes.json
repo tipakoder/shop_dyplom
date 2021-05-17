@@ -123,5 +123,27 @@
             "category",
             "subcategory"
         ]
+    },
+
+    {
+        "url" : "/productSaleOff/",
+        "method" : "post",
+        "controller" : "api",
+        "function" : "product_sale_off",
+        "level_access": 0,
+        "fields": [
+            "id"
+        ]
+    },
+
+    {
+        "url" : "/productRemove/",
+        "method" : "post",
+        "controller" : "api",
+        "function" : "product_remove",
+        "level_access": 0,
+        "fields": [
+            "id"
+        ]
     }
 ]

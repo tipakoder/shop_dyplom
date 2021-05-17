@@ -29,7 +29,7 @@
 
                 <nav id="header-wrapper-navigation" class="header-navigation">
                     <ul>
-                        <li class="search">
+                        <li class="search" onclick="search_show()">
                             <h3 class="name">Поиск</h3>
                             <i class="fas fa-search"></i>
                         </li>

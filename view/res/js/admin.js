@@ -256,4 +256,46 @@ function popup_new_product(){
     });
 }
 
+function product_sale_off(id){
+	if(!confirm("Вы действительно хотите cнять с продаж выбранный товар?")) return;
+
+	let dataSend = new FormData();
+	dataSend.append("id", id);
+	fetch("/productSaleOff/", {
+	  	body: dataSend,
+        method: "POST"
+    }).then(async(res) => {
+        return await res.json();
+    }).then((data) => {
+        if(data.type == "error"){
+            alert(data.data);
+        } else {
+        	location.reload();
+        }
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
+function product_remove(id){
+	if(!confirm("Вы действительно хотите удалить выбранный товар?")) return;
+
+	let dataSend = new FormData();
+	dataSend.append("id", id);
+	fetch("/productRemove/", {
+	  	body: dataSend,
+        method: "POST"
+    }).then(async(res) => {
+        return await res.json();
+    }).then((data) => {
+        if(data.type == "error"){
+            alert(data.data);
+        } else {
+        	location.href = "/admin/products/";
+        }
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
 document.addEventListener("DOMContentLoaded", ready_admin);

@@ -11,6 +11,7 @@ try{
 
 function dbQuery($sql){
     global $link;
+    if($link == null) return false;
     if($result_query = mysqli_query($link, $sql)){
         $result = [];
         while ($row = mysqli_fetch_assoc($result_query)) {
@@ -24,6 +25,7 @@ function dbQuery($sql){
 
 function dbQueryOne($sql){
     global $link;
+    if($link == null) return false;
     if($result_query = mysqli_query($link, $sql." LIMIT 1")){
         $result = mysqli_fetch_assoc($result_query);
         mysqli_free_result($result_query);
@@ -34,6 +36,7 @@ function dbQueryOne($sql){
 
 function dbExecute($sql){
     global $link;
+    if($link == null) return false;
     if(mysqli_query($link, $sql)){
         return true;
     }
@@ -42,5 +45,6 @@ function dbExecute($sql){
 
 function dbLastId(){
     global $link;
+    if($link == null) return false;
     return mysqli_insert_id($link);
 }
