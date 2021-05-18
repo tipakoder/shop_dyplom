@@ -21,25 +21,28 @@ function favorite(){
 function search(){
 	$sql = "SELECT product.*, category.name as category, subcategory.name as subcategory FROM product, product_category, category, subcategory WHERE category.id = product_category.category_id AND subcategory.id = product_category.subcategory_id AND product_category.product_id = product.id";
 	$filters = [];
+	$categorys = dbQuery("SELECT * FROM category");
+	$subcategorys = [];
 
 	// Фильтры (id категории, id подкатегории, название)
-	if(isset($_GET["category"]) && ($query = dbQueryOne("SELECT name FROM category WHERE id = '{$_GET["category"]}' LIMIT 1"))) {
-		$sql .= " AND category = '{$_GET["category"]}'";
+	if(isset($_GET["category"]) && ($query = dbQueryOne("SELECT name FROM category WHERE id = '{$_GET["category"]}'"))) {
+		$sql .= " AND category.id = '{$_GET["category"]}'";
 		$category_name = $query['name'];
-		$filters[] = ["title" => "Категория {$category_name}", "link" => "/search?category={$_GET["category"]}"];
+		$subcategorys = dbQuery("SELECT * FROM subcategory WHERE category_id = '{$_GET["category"]}'");
+		$filters[] = ["title" => $category_name, "link" => "/search?category={$_GET["category"]}"];
 	}
-	if(isset($_GET["subcategory"]) && ($query = dbQueryOne("SELECT name FROM subcategory WHERE id = '{$_GET["subcategory"]}' LIMIT 1"))) {
-		$sql .= " AND subcategory = '{$_GET["subcategory"]}'";
+	if(isset($_GET["subcategory"]) && ($query = dbQueryOne("SELECT name FROM subcategory WHERE id = '{$_GET["subcategory"]}'"))) {
+		$sql .= " AND subcategory.id = '{$_GET["subcategory"]}'";
 		$subcategory_name = $query['name'];
-		$filters[] = ["title" => "Подкатегория {$subcategory_name}", "link" => "/search?subcategory={$_GET["subcategory"]}"];
+		$filters[] = ["title" => $subcategory_name, "link" => "/search?subcategory={$_GET["subcategory"]}"];
 	}
 	if(isset($_GET["q"])) {
-		$sql .= " AND (product.name LIKE '%{$_GET["q"]}%' OR category.name LIKE '%{$_GET["q"]}%' OR subcategory.name LIKE '%{$_GET["q"]}%')";
-		$filters[] = ["title" => "По имени <b>{$_GET["q"]}</b>", "link" => "/search?q={$_GET["q"]}"];
+		$sql .= " AND product.name LIKE '%{$_GET["q"]}%'";
+		$filters[] = ["title" => '"'.$_GET["q"].'"', "link" => "/search?q={$_GET["q"]}"];
 	}
 
 	$products = dbQuery($sql);
-	load_view("search", "SHOP.d — Поиск", ["products" => $products, "filters" => $filters]);
+	load_view("search", "SHOP.d — Поиск", ["products" => $products, "filters" => $filters, "categorys" => $categorys, "subcategorys" => $subcategorys]);
 }
 
 // Product page (/product/{id}/)

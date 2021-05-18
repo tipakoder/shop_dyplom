@@ -298,6 +298,17 @@ body{
     border-bottom: 1px solid #ececec;
 }
 
+#main-wrapper section .plug-box{
+    padding: 32px;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    grid-gap: 16px;
+    background-color: #ddd;
+}
+
 #main-wrapper section.background{
     background-color: #fafafa;
 }
@@ -688,7 +699,7 @@ td {
 }
 
 #search-wrapper .search-result{
-    display: flex;
+    display: none;
     flex-direction: column;
     background-color: #fff;
     max-height: 50vh;
@@ -701,6 +712,12 @@ td {
 #search-wrapper .search-result .result{
     padding: 16px;
     border-top: 1px solid #E2E2E2;
+    transition: 0.3s background-color;
+    cursor: pointer;
+}
+
+#search-wrapper .search-result .result:hover{
+    background-color: #dddddd;
 }
 
 #search-wrapper .search-result .result .container{

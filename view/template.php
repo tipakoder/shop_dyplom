@@ -104,6 +104,7 @@
     </div>
 
     <script src="/view/res/js/popup.js"></script>
+    <script src="/view/res/js/search.js"></script>
     <script src="/view/res/js/main.js"></script>
     <script src="/view/res/js/catalog.js"></script>
     <?php if($AUTH){ ?>
