@@ -257,3 +257,12 @@ function product_remove(){
 	}
 	send_answer(["Неизвестная ошибка"]);
 }
+
+function product_search(){
+	global $currentOptions;
+	$query = strtolower(verify_field("Текст запроса", $currentOptions['query'], 1, 120));
+	if($query = dbQuery("SELECT product.*, category.name as category, subcategory.name as subcategory FROM product, product_category, category, subcategory WHERE category.id = product_category.category_id AND subcategory.id = product_category.subcategory_id AND product_category.product_id = product.id AND (product.name LIKE '%{$query}%' OR category.name LIKE '%{$query}%' OR subcategory.name LIKE '%{$query}%') LIMIT 6")){
+		send_answer(["products" => $query], true);
+	}
+	send_answer(["products" => []], true);
+}

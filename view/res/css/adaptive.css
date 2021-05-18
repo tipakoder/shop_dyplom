@@ -234,4 +234,10 @@
     #profile .userbox .avatar{
         max-height: auto !important;
     }
+
+    /* FORM CONTENT */
+    .form-content{
+        min-width: auto !important;
+        max-width: 100% !important;
+    }
 }

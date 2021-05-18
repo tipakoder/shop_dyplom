@@ -21,6 +21,13 @@
     },
 
     {
+        "url" : "/search/",
+        "method" : "get",
+        "controller" : "front",
+        "function" : "search"
+    },
+
+    {
         "url" : "/product.(\\d+)/",
         "method" : "get",
         "controller" : "front",

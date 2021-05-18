@@ -306,31 +306,102 @@ function search_show(){
     element.id = "search-wrapper";
     element.innerHTML = `
     <div class="search-content">
-        <div class="block query container-fluid">
+        <div class="container-fluid block query">
+            <div class="icon search">
+                <i class="fas fa-search"></i>
+            </div>
             <div class="field">
                 <input name="query" type="text" placeholder="Что Вас интересует?">
             </div>
-            <button class="btn gray filled">Найти</button>
+            <button name="do" class="btn gray filled"><i class="fas fa-search"></i> Найти</button>
+            <div class="icon close">
+                <i class="fas fa-times"></i>
+            </div>
         </div>
 
-        <div class="container-fluid search-result">
-
+        <div class="search-result">
+            <ul>
+                <li class="result">
+                    <div class="container">
+                        <div class="image" style="background-image: url('/view/res/img/image.jpg')"></div>
+                        <div class="main-info">
+                            <h3 class="name">Название товара</h3>
+                            <p class="price">1990 руб.</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <button class="btn gray filled all-result">Все результаты</button>
         </div>
     </div>
     `;
+    element.querySelector("button[name=do]").addEventListener("click", search_request);
+    element.querySelector("input[name=query]").addEventListener("change", search_request);
     document.body.appendChild(element);
+}
+
+function search_request(){
+    let query = document.querySelector("#search-wrapper input[name=query]").value;
+    if(query != null){
+        let sendData = new FormData();
+        sendData.append("query", query);
+        fetch("/productSearch/", {
+            body: sendData,
+            method: "POST"
+        }).then(async(res) => {
+            return await res.json();
+        }).then((data) => {
+            let search_result_wrapper = document.querySelector("#search-wrapper .search-result");
+            search_result_wrapper.innerHTML
+            if(data.data.products == null){
+                search_result_wrapper.style.display = 'none';
+                return;
+            }
+
+            search_result_wrapper.style.display = 'flex';
+            search_result_wrapper.querySelector("ul").innerHTML = "";
+            search_result_wrapper.querySelector(".all-result").setAttribute("onclick", `location.href = '/search?q=${query}'`);
+
+            let products = data.data.products;
+            for(let product of products){
+                search_result_wrapper.querySelector("ul").appendChild(generate_search_result(product, query));
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+}
+
+function generate_search_result(product, query){
+    let re = new RegExp(`(${query})`, 'i');
+    console.log(re)
+    console.log(re.test(product.name))
+    let name_data = product.name.replace(re, "<b>$1</b>");
+
+    let element = document.createElement("li");
+    element.className = "result";
+    element.innerHTML = `
+    <div class="container">
+        <div class="image" style="background-image: url('${product.photo}')"></div>
+        <div class="main-info">
+            <h3 class="name">${name_data}</h3>
+            <p class="price">${product.price} руб.</p>
+        </div>
+    </div>
+    `;
+    return element;
 }
 
 function search_close(){
     if(document.getElementById("search-wrapper")) document.getElementById("search-wrapper").remove();
 }
 
-document.addEventListener("click", function(e){
-    console.log(e.target)
-    if( !e.target.closest(".search-content") && document.getElementById("search-wrapper")){
-        search_close();
-    }
-});
+// document.addEventListener("click", function(e){
+//     console.log(e.target)
+//     if( !e.target.closest(".search-content") && document.getElementById("search-wrapper")){
+//         search_close();
+//     }
+// });
 
 document.addEventListener("DOMContentLoaded", ready_adaptive);
 window.addEventListener("load", () => {
