@@ -138,9 +138,7 @@ function catalog_add_favorite(product){
 }
 
 function catalog_add_cart(product){
-    let slots = tryParseJSON(localStorage.getItem("catalog_cart_slots"));
-    if(slots.findIndex(slt => slt.id == product.id) === -1) slots.push(product);
-    localStorage.setItem("catalog_cart_slots", JSON.stringify(slots));
+    
     cart_update();
 }
 

@@ -48,7 +48,7 @@ function search(){
 // Product page (/product/{id}/)
 function product($options){
 	$product_id = (isset($options[0][1]) && $options[0][1] != null) ? $options[0][1] : 0;
-	if( $query = dbQueryOne("SELECT product.*, category.name as category, subcategory.name as subcategory FROM product, product_category, category, subcategory WHERE category.id = product_category.category_id AND subcategory.id = product_category.subcategory_id AND product_category.product_id = product.id AND product.id = '{$product_id}'") ){
+	if( $query = dbQueryOne("SELECT product.*, category.name as category, category.id as category_id, subcategory.name as subcategory, subcategory.id as subcategory_id FROM product, product_category, category, subcategory WHERE category.id = product_category.category_id AND subcategory.id = product_category.subcategory_id AND product_category.product_id = product.id AND product.id = '{$product_id}'") ){
 		$query["photos"] = dbQuery("SELECT path FROM product_photo WHERE product_id = '{$product_id}'");
 		load_view("product", "SHOP.d — {$query['name']}", ["product" => $query]);
 	} else {

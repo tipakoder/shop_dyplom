@@ -266,3 +266,12 @@ function product_search(){
 	}
 	send_answer(["products" => []], true);
 }
+
+function product_get(){
+	global $currentOptions;
+	$product_id = verify_field("ID", $currentOptions['id'], 1, 12);
+	if($query = dbQueryOne("SELECT product.*, category.name as category, subcategory.name as subcategory FROM product, product_category, category, subcategory WHERE category.id = product_category.category_id AND subcategory.id = product_category.subcategory_id AND product_category.product_id = product.id")){
+		send_answer(["product" => $query], true);
+	}
+	send_answer(["Товар отсутствует"]);
+}

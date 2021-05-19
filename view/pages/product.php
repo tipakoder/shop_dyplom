@@ -1,8 +1,8 @@
 <section id="product-page">
 	<div class="container">
 		<div class="section-path">
-			<a class="section" href=""><?=$product['category']?></a>
-			<a class="section" href=""><?=$product['subcategory']?></a>
+			<a class="section" href="/search?category=<?=$product['category_id']?>"><?=$product['category']?></a>
+			<a class="section"  href="/search?category=<?=$product['category_id']."&subcategory=".$product['subcategory_id']?>"><?=$product['subcategory']?></a>
 		</div>
 
 		<div class="content">

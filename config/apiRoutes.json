@@ -154,5 +154,15 @@
         "fields": [
             "query"
         ]
+    },
+
+    {
+        "url" : "/productGet/",
+        "method" : "post",
+        "controller" : "api",
+        "function" : "product_get",
+        "fields": [
+            "id"
+        ]
     }
 ]
