@@ -45,4 +45,26 @@ function popup_edit_profile(){
     });
 }
 
+function popup_change_password(){
+	let form = document.createElement("form");
+    form.className = "form-content";
+    form.innerHTML = `
+    <div class="field">
+        <input name="oldpassword" type="password" placeholder="Старый пароль">
+    </div>
+
+    <div class="field">
+        <input name="newpassword" type="password" placeholder="Новый пароль">
+    </div>
+    <div class="form-actions">
+        <button class="btn gray filled">Сохранить</button>
+    </div>
+    `;
+    submit_form(form, "/changePassword/", () => {
+        alert("Пароль успешно изменён");
+        popupClose();
+    });
+    popup(form, "Смена пароля");
+}
+
 document.addEventListener("DOMContentLoaded", ready_user);

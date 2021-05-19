@@ -46,6 +46,18 @@
     },
 
     {
+        "url" : "/changePassword/",
+        "method" : "post",
+        "controller" : "api",
+        "function" : "change_password",
+        "auth": true,
+        "fields": [
+            "oldpassword",
+            "newpassword"
+        ]
+    },
+
+    {
         "url" : "/newPromocode/",
         "method" : "post",
         "controller" : "api",
@@ -163,6 +175,33 @@
         "function" : "product_get",
         "fields": [
             "id"
+        ]
+    },
+
+    {
+        "url" : "/editProductGet/",
+        "method" : "post",
+        "controller" : "api",
+        "function" : "edit_product_get",
+        "level_access": 0,
+        "fields": [
+            "id"
+        ]
+    },
+
+    {
+        "url" : "/editProductProcess/",
+        "method" : "post",
+        "controller" : "api",
+        "function" : "edit_product_process",
+        "level_access": 0,
+        "fields": [
+            "id",
+            "name",
+            "description",
+            "price",
+            "category",
+            "subcategory"
         ]
     }
 ]

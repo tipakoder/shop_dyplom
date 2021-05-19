@@ -524,6 +524,11 @@ body{
     transition: 0.3s background, 0.3s color, 0.3s border;
 }
 
+.btn.gray{
+    border: 1px solid #808080;
+    color: #808080;
+}
+
 .btn[disabled]{
     border: 1px solid #C29440;
     color: #C29440;
@@ -539,11 +544,14 @@ body{
     color: #FFF;
 }
 
+.btn.gray:not([disabled]):hover{
+    background-color: #808080;
+    color: #FFF;
+}
+
 .btn.filled{
     background-color: orange;
     color: #FFF;
-    border: none;
-    padding: 10px;
 }
 
 .btn.filled[disabled]{

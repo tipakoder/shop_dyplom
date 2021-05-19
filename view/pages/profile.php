@@ -4,6 +4,7 @@
 			<div class="column">
 				<img src="/view/res/img/avatar.jpg" class="avatar">
 				<button class="btn gray filled" onclick="popup_edit_profile()">Редактировать</button>
+				<button class="btn gray filled" onclick="popup_change_password()">Сменить пароль</button>
 			</div>
 
 			<div class="column maininfo">

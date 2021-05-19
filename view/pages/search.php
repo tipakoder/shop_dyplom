@@ -76,7 +76,7 @@
 		    	<div class="plug-box">
 		    		<h3 class="text">Товаров с таким фильтром не найдено</h3>
 		    	</div>
-		    	<?php endif;?>
+		    	<?php endif; ?>
 			</div>
 		</div>
 	</div>
