@@ -177,6 +177,65 @@ function popup_reg(login = ""){
     popup(form, "Регистрация личного кабинета");
 }
 
+function popup_new_order(){
+    fetch("/prepareNewOrder/", {
+        method: "POST"
+    }).then(async(res) => {
+        return await res.json();
+    }).then((data) => {
+        if(data.type != "error"){
+            let delivery_options = '<option value="null" selected disabled>Выберите службу доставки</option>';
+            for(let delivery of data.data.deliverys){
+                delivery_options += `<option value="${delivery.id}">${delivery.title}</option>`;
+            }
+
+            let form = document.createElement("form");
+            form.className = "form-content";
+            form.innerHTML = `
+            <div class="field">
+                <input name="address" type="text" placeholder="Полный адрес доставки" required>
+            </div>
+
+            <div class="field">
+                <select name="delivery" required>
+                    ${delivery_options}
+                </select>
+            </div>
+
+            <div class="field">
+                <input name="promocode" type="text" placeholder="Промокод">
+            </div>
+
+            <div class="field">
+                <input name="name" type="text" placeholder="Имя" required ${(data.data.userData) ? 'value="'+data.data.userData.name+'" disabled' : ""}>
+            </div>
+
+            <div class="field">
+                <input name="email" type="email" placeholder="Электронная почта" ${(data.data.userData) ? 'value="'+data.data.userData.email+'" disabled' : ""} required>
+            </div>
+
+            <div class="field">
+                <input name="phone" type="tel" placeholder="Телефон" ${(data.data.userData) ? 'value="'+data.data.userData.telephone+'" disabled' : ""} required>
+            </div>
+
+            <div class="field">
+                <textarea name="notes" placeholder="Комментарий к заказу" required></textarea>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn filled">Подтвердить</button>
+            </div>
+            `;
+            submit_form(form, "/reg/", () => {
+                location.href = "/profile/";
+            });
+            popup(form, "Оформление заказа");
+        }
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
 function submit_form(form, url, success = console.log, customData = false, method = "POST"){
     form.addEventListener("submit", (e) => {
         e.preventDefault();

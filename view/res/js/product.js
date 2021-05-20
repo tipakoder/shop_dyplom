@@ -74,21 +74,22 @@ function render_cart(){
 	}
 }
 
-function generate_cart_slot(slot, controls = true){
+function generate_cart_slot(slot){
 	let elementBody = document.createElement("div");
     elementBody.dataset.id = slot.id;
     elementBody.className = "cart-slot";
+    elementBody.setAttribute("href", `/product/${slot.id}/`);
     elementBody.innerHTML = `
     <img class="image" src="${slot['photo']}" alt="">
     <div class="body-wrapper">
         <h5 class="product-name">${slot['name']}</h5>
         <p class="product-price">${slot['price']} руб./шт</p>
     </div>
-    ${(controls) ? `<div class="controls-wrapper">
-        <div class="control event-less-cart" data-id="${slot['id']}">-</div>
+    <div class="controls-wrapper">
+        <div class="control btn gray filled event-less-cart" data-id="${slot['id']}">-</div>
         <div class="control count_number">${slot['count']}</div>
-        <div class="control event-more-cart" data-id="${slot['id']}">+</div>
-    </div>` : ""}
+        <div class="control btn gray filled event-more-cart" data-id="${slot['id']}">+</div>
+    </div>
     <i class="slot-remove fas fa-times"></i>
     `;
 
@@ -153,6 +154,21 @@ function less_cart(id){
 	}
 }
 
+function product_page_events(e){
+	let product_count = document.getElementById("product-count");
+	if(e.target.classList.contains("event-product-more")){
+		product_count.textContent = parseInt(product_count.textContent)+1;
+	}
+	if(e.target.classList.contains("event-product-less")){
+		if(parseInt(product_count.textContent)-1 > 0)
+			product_count.textContent = parseInt(product_count.textContent)-1;
+	}
+	if(e.target.classList.contains("event-product-add-cart")){
+		e.preventDefault();
+		add_cart(e.target.dataset.id, parseInt(product_count.textContent));
+	}
+}
+
 // ------------- FAVORITE
 
 function render_favorite(){
@@ -160,19 +176,17 @@ function render_favorite(){
 	if(window.productFavoriteSlots != null && document.getElementById("favorite-count-text")) 
 		document.getElementById("favorite-count-text").textContent = window.productFavoriteSlots.length;
 
-	if(window.productFavoriteSlots.length > 0 && document.getElementById("favorite-body")){
+	if(window.productFavoriteSlots.length > 0 && document.getElementById("favorite-page-content")){
 		// Получить список избранного на отдельной странице
 	    let contentPageBody = document.getElementById("favorite-page-content");
 	    // Отчищаем список избранного на отдельной странице
-	    if(contentPageBody) {
-	    	document.getElementById("favorite-page-content-plug").style.display = "none";
-	    	contentPageBody.innerHTML = '';
-	    }
+	    contentPageBody.innerHTML = '';
+	    // Выключаем заглушку
+	    document.getElementById("favorite-page-content-plug").style.display = "none";
 	    // Перебираем список избранного и воссоздаём
 		for(let slot of window.productFavoriteSlots){
-	        if(contentPageBody) contentPageBody.appendChild(generate_cart_slot(slot, "catalog_favorite_slots"));
+	        if(contentPageBody) contentPageBody.appendChild(generate_favorite_slot(slot, "catalog_favorite_slots"), false);
 		}
-		document.getElementById("favorite-body").querySelector(".content").style.display = "block";
 	} else {
 		// Отчистить список избранного
 		if(document.getElementById("favorite-page-content")) {
@@ -180,6 +194,28 @@ function render_favorite(){
 			document.getElementById("favorite-page-content-plug").style.display = "flex";
 		}
 	}
+}
+
+function generate_favorite_slot(slot){
+	let elementBody = document.createElement("a");
+    elementBody.dataset.id = slot.id;
+    elementBody.className = "cart-slot";
+    elementBody.setAttribute("href", `/product/${slot.id}/`);
+    elementBody.innerHTML = `
+    <img class="image" src="${slot['photo']}" alt="">
+    <div class="body-wrapper">
+        <h5 class="product-name">${slot['name']}</h5>
+        <p class="product-price">${slot['price']} руб./шт</p>
+    </div>
+    <i class="slot-remove fas fa-times"></i>
+    `;
+
+    elementBody.querySelector(".slot-remove").addEventListener("click", (e) => {
+        e.preventDefault();
+        remove_favorite(slot.id);
+    });
+
+    return elementBody;
 }
 
 function get_favorite(id){
@@ -215,24 +251,34 @@ function remove_favorite(id){
 // ------------- GLOBAL EVENT CLICK
 
 document.addEventListener("click", function(e){
+	// FOR PRODUCT
+	if(document.getElementById("product-page")){
+		product_page_events(e);
+	}
 	// FOR CART
 	if(e.target.classList.contains("event-add-cart")){
+		e.preventDefault();
 		add_cart(e.target.dataset.id);
 	}
 	if(e.target.classList.contains("event-remove-cart")){
+		e.preventDefault();
 		remove_cart(e.target.dataset.id);
 	}
 	if(e.target.classList.contains("event-more-cart")){
+		e.preventDefault();
 		more_cart(e.target.dataset.id);
 	}
 	if(e.target.classList.contains("event-less-cart")){
+		e.preventDefault();
 		less_cart(e.target.dataset.id);
 	}
 	// FOR FAVORITE
 	if(e.target.classList.contains("event-add-favorite")){
+		e.preventDefault();
 		add_favorite(e.target.dataset.id);
 	}
 	if(e.target.classList.contains("event-remove-favorite")){
+		e.preventDefault();
 		remove_favorite(e.target.dataset.id);
 	}
 });

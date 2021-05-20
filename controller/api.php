@@ -84,7 +84,7 @@ function edit_account(){
 }
 
 function change_password(){
-	global $currentOptions, $currentUser;;
+	global $currentOptions, $currentUser;
 	$oldpassword = verify_field("Старый пароль", $currentOptions['oldpassword'], 4, 0);
 	$newpassword = password_hash(verify_field("Новый пароль", $currentOptions['newpassword'], 4, 0), PASSWORD_DEFAULT);
 
@@ -96,6 +96,12 @@ function change_password(){
 		send_answer([], true);
 	}
 	send_answer(["Ошибка сохранения пароля"]);
+}
+
+function prepare_new_order(){
+	global $currentUser;
+	$deliverys = dbQuery("SELECT * FROM delivery_service");
+	send_answer(["userData" => $currentUser, "deliverys" => $deliverys], true);
 }
 
 // ---------------------- ADMIN

@@ -25,17 +25,24 @@
 				<h3 class="title"><?=$product['name']?></h3>
 				<p class="description"><?=$product['description']?></p>
 				<?php if($product["on_sale"] == 'n'): ?>
-				<p class="active"><i class="fas fa-exclamation"></i>Товар отсутствует в продаже</p>
+					<p class="active"><i class="fas fa-exclamation"></i>Товар отсутствует в продаже</p>
+				<?php else: ?>
+					<p class="price"><b>Цена: </b><?=$product['price']?> руб</p>
 				<?php endif; ?>
 
 				<div class="actions">
 					<?php if($SYS_LEVELACCESS == 0){ ?>
-						<button class="btn" onclick="product_remove(<?=$product["id"]?>)"><i class="fas fa-trash"></i>Удалить</button>
-						<button class="btn" onclick="product_sale_off(<?=$product["id"]?>)"><i class="fas fa-store-slash"></i>Снять с продаж</button>
-						<button class="btn filled"><i class="fas fa-pen"></i>Редактировать</button>
+						<button class="btn gray" onclick="product_remove(<?=$product["id"]?>)"><i class="fas fa-trash"></i>Удалить</button>
+						<button class="btn gray" onclick="product_sale_off(<?=$product["id"]?>)"><i class="fas fa-store-slash"></i>Снять с продаж</button>
+						<button class="btn gray filled"><i class="fas fa-pen"></i>Редактировать</button>
 					<?php }else{ ?>
-						<button data-id="<?=$product["id"]?>" class="btn event-add-favorite" <?=($product['on_sale'] == 'n') ? "disabled" : "" ?>><i class="fas fa-heart"></i>В избранное</button>
-						<button data-id="<?=$product["id"]?>" class="btn filled event-add-cart" <?=($product['on_sale'] == 'n') ? "disabled" : "" ?>><i class="fas fa-shopping-cart"></i>Добавить в корзину</button>
+						<button data-id="<?=$product["id"]?>" class="btn gray event-add-favorite" <?=($product['on_sale'] == 'n') ? "disabled" : "" ?>><i class="fas fa-heart"></i>В избранное</button>
+						<div class="count-bar">
+							<button data-id="<?=$product["id"]?>" class="btn gray filled event-product-less">-</button>
+							<p id="product-count">1</p>
+							<button data-id="<?=$product["id"]?>" class="btn gray filled event-product-more">+</button>
+						</div>
+						<button data-id="<?=$product["id"]?>" class="btn gray filled event-product-add-cart" <?=($product['on_sale'] == 'n') ? "disabled" : "" ?>><i class="fas fa-shopping-cart"></i>Добавить в корзину</button>
 					<?php } ?>
 				</div>
 			</div>

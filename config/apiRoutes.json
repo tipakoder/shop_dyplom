@@ -203,5 +203,12 @@
             "category",
             "subcategory"
         ]
+    },
+
+    {
+        "url" : "/prepareNewOrder/",
+        "method" : "post",
+        "controller" : "api",
+        "function" : "prepare_new_order"
     }
 ]
