@@ -180,7 +180,7 @@ function new_product(){
 	// Цена товара
 	$price = verify_field("Цена товара", $currentOptions['price'], 1, 10);
 	// Основное фото
-	$photo = (isset($_FILES['photo'])) ? $_FILES['photo'] : null;
+	$photo = (isset($_FILES['photo']) && $_FILES['photo']["name"] != null) ? $_FILES['photo'] : null;
 	// Дополнительные фото
 	$additional_photos = [];
 	if(isset($_FILES['photo1']) && $_FILES['photo1']["name"] != null) $additional_photos[] = $_FILES['photo1'];
@@ -294,12 +294,12 @@ function edit_product_process(){
 	// Цена товара
 	$price = verify_field("Цена товара", $currentOptions['price'], 1, 10);
 	// Основное фото
-	$photo = (isset($_FILES['photo'])) ? $_FILES['photo'] : null;
+	$photo = (isset($_FILES['photo']) && $_FILES['photo']["name"] != null) ? $_FILES['photo'] : null;
 	// Дополнительные фото
 	$additional_photos = [];
-	if(isset($_FILES['photo1']) && $_FILES['photo1']["name"] != null) $additional_photos[] = $_FILES['photo1'];
-	if(isset($_FILES['photo2']) && $_FILES['photo2']["name"] != null) $additional_photos[] = $_FILES['photo2'];
-	if(isset($_FILES['photo3']) && $_FILES['photo3']["name"] != null) $additional_photos[] = $_FILES['photo3'];
+	if(isset($_FILES['photo1']) && $_FILES['photo1']["name"] != null) $additional_photos['photo1'] = $_FILES['photo1'];
+	if(isset($_FILES['photo2']) && $_FILES['photo2']["name"] != null) $additional_photos['photo2'] = $_FILES['photo2'];
+	if(isset($_FILES['photo3']) && $_FILES['photo3']["name"] != null) $additional_photos['photo3'] = $_FILES['photo3'];
 	// Категория товара
 	$category = verify_field("Категория товара", $currentOptions['category'], 1, 12);
 	// Подкатегория товара
@@ -325,13 +325,18 @@ function edit_product_process(){
 		}
 		$subcategory = dbLastId();
 	}
-	// Загружаем основную фотографию
-	$photo_path = "/content/".time()."_product.jpg";
-	if(!upload_file($photo_path, $photo)){
-		send_answer(["Ошибка загрузки фотографии"]);
+	// Загружаем основную фотографию (если нужно обновить)
+	if($photo != null){
+		$photo_path = "/content/".time()."_product.jpg";
+		if(!upload_file($photo_path, $photo)){
+			send_answer(["Ошибка загрузки фотографии"]);
+		}
+		if(!dbExecute("UPDATE product SET photo = '{$photo_path}' WHERE id = '{$product_id}' LIMIT 1") ){
+			send_answer(["Ошибка обновления фотографии в базе данных"]);
+		}
 	}
 	// Создаём запись о товаре
-	if( dbExecute("UPDATE product SET name = '{$name}', description = '{$description}', photo = '{$photo_path}', price = '{$price}' WHERE id = '{$product_id}' LIMIT 1") ){
+	if( dbExecute("UPDATE product SET name = '{$name}', description = '{$description}', price = '{$price}' WHERE id = '{$product_id}' LIMIT 1") ){
 		// Связываем товар с нужной категорией и подкатегорией
 		if(!dbExecute("UPDATE product_category SET category_id = '{$category}', subcategory_id = '{$subcategory}' WHERE product_id = '{$product_id}' LIMIT 1")){
 			send_answer(["Ошибка связи категории с товаром"]);
@@ -339,23 +344,28 @@ function edit_product_process(){
 		// Добавляем дополнительные фото (если есть)
 		if($additional_photos != []){
 			// Создаём папку товара
-			mkdir(ROOTDIR."/content/{$product_id}/");
-			$sql_to_execute = "INSERT INTO product_photo (product_id, path) VALUES";
+			$path_folder = ROOTDIR."/content/{$product_id}/";
+			if(file_exists($path_folder)) mkdir($path_folder);
 			$i = 0;
-			foreach ($additional_photos as $photo_) {
+			foreach ($additional_photos as $key => $photo_) {
 				if($photo_["name"] == null) continue;
 
 				$path_upload = "/content/{$product_id}/".time()."_{$i}.jpg";
 				if(upload_file($path_upload, $photo_)){
-					$sql_to_execute .= " ('{$product_id}', '{$path_upload}')";
-					if($i < count($additional_photos) - 1) $sql_to_execute .= ",";
+					if(isset($currentOptions[$key."_id"])){
+						$_photo_id = $currentOptions[$key."_id"];
+						if(!dbExecute("UPDATE product_photo SET path = '{$path_upload}' WHERE id = '{$_photo_id}' LIMIT 1")){
+							send_answer(["Неизвестная ошибка добавления дополнительных фотографий"]);
+						}
+					} else {
+						if(!dbExecute("INSERT INTO product_photo (product_id, path) VALUES ('{$product_id}', '{$path_upload}')")){
+							send_answer(["Неизвестная ошибка добавления дополнительных фотографий"]);
+						}
+					}
 				} else {
 					send_answer(["Ошибка загрузки дополнительной фотографии"]);
 				}
 				$i++;
-			}
-			if(!dbExecute($sql_to_execute)){
-				send_answer(["Неизвестная ошибка добавления дополнительных фотографий"]);
 			}
 		}
 		// Успех
@@ -376,7 +386,7 @@ function product_search(){
 function product_get(){
 	global $currentOptions;
 	$product_id = verify_field("ID", $currentOptions['id'], 1, 12);
-	if($query = dbQueryOne("SELECT product.*, category.name as category, subcategory.name as subcategory FROM product, product_category, category, subcategory WHERE category.id = product_category.category_id AND subcategory.id = product_category.subcategory_id AND product_category.product_id = product.id")){
+	if($query = dbQueryOne("SELECT product.*, category.name as category, subcategory.name as subcategory FROM product, product_category, category, subcategory WHERE category.id = product_category.category_id AND subcategory.id = product_category.subcategory_id AND product_category.product_id = product.id AND product_id = '{$product_id}'")){
 		send_answer(["product" => $query], true);
 	}
 	send_answer(["Товар отсутствует"]);

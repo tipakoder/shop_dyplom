@@ -5,7 +5,7 @@
             <ul class="submenu switch">
                 <li class="selected" onclick="load_products('news')">Новинки</li>
                 <li onclick="load_products('hits')">Хиты</li>
-                <li><a href="#">Весь каталог</a></li>
+                <li><a href="/search">Весь каталог</a></li>
             </ul>
         </div>
 
@@ -23,7 +23,7 @@
                     <div class="submenu">
                         <div class="actions">
                             <button class="btn" onclick="location.href='/product/<?=$best_deal['id']?>/';"><i class="fas fa-print"></i> Страница товара</button>
-                            <button class="btn to_favorite"><i class="fas fa-heart"></i> Нравится</button>
+                            <button class="btn event-add-favorite" data-id="<?=$best_deal['id']?>"><i class="fas fa-heart"></i> Нравится</button>
                             <button class="btn filled event-add-cart" data-id="<?=$best_deal['id']?>"><i class="fas fa-shopping-cart"></i> В корзину</button>
                             <button class="btn gray filled close"><i class="fas fa-times"></i> Закрыть</button>
                         </div>

@@ -63,8 +63,8 @@
 		                    <div class="submenu">
 		                        <div class="actions">
 		                            <button class="btn" onclick="location.href='/product/<?=$product['id']?>/';"><i class="fas fa-print"></i> Страница товара</button>
-		                            <button class="btn to_favorite"><i class="fas fa-heart"></i> Нравится</button>
-		                            <button class="btn filled to_cart"><i class="fas fa-shopping-cart"></i> В корзину</button>
+		                            <button class="btn event-add-favorite" data-id="<?=$product['id']?>"><i class="fas fa-heart"></i> Нравится</button>
+		                            <button class="btn filled event-add-cart" data-id="<?=$product['id']?>"><i class="fas fa-shopping-cart"></i> В корзину</button>
 		                            <button class="btn gray filled close"><i class="fas fa-times"></i> Закрыть</button>
 		                        </div>
 		                    </div>

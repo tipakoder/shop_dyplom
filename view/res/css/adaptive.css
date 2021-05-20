@@ -165,6 +165,7 @@
     .catalog-container > .product.showing_adaptive .submenu{
         display: block !important;
         bottom: 71px !important;
+        margin-bottom: 114px;
     }
 
     .catalog-container > .product.showing_adaptive .submenu .close{

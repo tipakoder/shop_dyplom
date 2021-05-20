@@ -46,9 +46,6 @@ function ready_adaptive(){
             });
         }
     }
-    // Setup cart and favorite
-    cart_update();
-    favorite_update();
     // Setup slider
     let sliders_wrapper = document.querySelectorAll(".slider-wrapper");
     for(let slider of sliders_wrapper){
@@ -107,104 +104,13 @@ function resize_window(){
 
 function click_product(e){
     e.preventDefault();
-    if(e.target !== this.querySelector(".submenu .to_favorite") && e.target !== this.querySelector(".submenu .to_cart")){
-        if(window.innerWidth <= 600){
-            if(e.target === this.querySelector(".submenu .close")){
-                this.classList.remove("showing_adaptive");
-            } else {
-                this.classList.add("showing_adaptive");
-            }
+    if(window.innerWidth <= 600){
+        if(e.target === this.querySelector(".submenu .close")){
+            this.classList.remove("showing_adaptive");
         } else {
-            
-        }
-    } else {
-        let product = tryParseJSON(this.dataset.product);
-        switch(e.target){
-            case this.querySelector(".submenu .to_favorite"):
-                catalog_add_favorite(product);
-                break;
-            case this.querySelector(".submenu .to_cart"):
-                catalog_add_cart(product);
-                break;
+            this.classList.add("showing_adaptive");
         }
     }
-}
-
-function catalog_add_favorite(product){
-    let slots = tryParseJSON(localStorage.getItem("catalog_favorite_slots"));
-    if(slots.findIndex(slt => slt.id == product.id) === -1) slots.push(product);
-    localStorage.setItem("catalog_favorite_slots", JSON.stringify(slots));
-    favorite_update();
-}
-
-function catalog_add_cart(product){
-    
-    cart_update();
-}
-
-function cart_update(){
-    let slots = tryParseJSON(localStorage.getItem("catalog_cart_slots"));
-    if(slots != null && document.getElementById("cart-count-text")) document.getElementById("cart-count-text").textContent = slots.length;
-    if(slots.length > 0 && document.getElementById("cart-body")){
-        let contentBody = document.getElementById("cart-body").querySelector(".content").children[0];
-        let contentPageBody = document.getElementById("cart-page-content");
-        document.getElementById("cart-body").querySelector(".plug-box").style.display = "none";
-        contentBody.innerHTML = '';
-        if(contentPageBody) contentPageBody.innerHTML = '';
-        for(let slot of slots){
-            contentBody.appendChild(generate_cart_slot(slot, "catalog_cart_slots"));
-            if(contentPageBody) contentPageBody.appendChild(generate_cart_slot(slot, "catalog_cart_slots"));
-        }
-        document.getElementById("cart-body").querySelector(".content").style.display = "block";
-    } else {
-        if(document.getElementById("cart-body")){
-            document.getElementById("cart-body").querySelector(".plug-box").style.display = "flex";
-            document.getElementById("cart-body").querySelector(".content").style.display = "none";
-        }
-        if(document.getElementById("cart-page-content")) document.getElementById("cart-page-content").innerHTML = "";
-    }
-}
-
-function favorite_update(){
-    let slots = tryParseJSON(localStorage.getItem("catalog_favorite_slots"));
-    if(slots != null && document.getElementById("favorite-count-text")) document.getElementById("favorite-count-text").textContent = slots.length;
-
-    if(slots.length > 0){
-        let contentPageBody = document.getElementById("favorite-page-content");
-        if(contentPageBody == null) return;
-        contentPageBody.innerHTML = '';
-        for(let slot of slots){
-            contentPageBody.appendChild(generate_cart_slot(slot, "catalog_favorite_slots"));
-        }
-    } else {
-        if(document.getElementById("favorite-page-content")) document.getElementById("favorite-page-content").innerHTML = "";
-    }
-}
-
-function generate_cart_slot(slot, slots_name){
-    let elementBody = document.createElement("div");
-    elementBody.dataset.id = slot.id;
-    elementBody.className = "cart-slot";
-    elementBody.innerHTML = `
-    <img class="image" src="${slot['photo']}" alt="">
-    <div class="body-wrapper">
-        <h5 class="product-name">${slot['name']}</h5>
-        <p class="product-price">${slot['price']} руб./шт</p>
-    </div>
-    <i class="slot-remove fas fa-times"></i>
-    `;
-
-    elementBody.querySelector(".slot-remove").addEventListener("click", (e) => {
-        e.preventDefault();
-        let slots = tryParseJSON(localStorage.getItem(slots_name));
-        console.log(slots)
-        if(slots.findIndex(slt => slt.id == slot.id) !== -1) slots = slots.splice(slot.id, 1);
-        localStorage.setItem(slots_name, JSON.stringify(slots));
-        cart_update();
-        favorite_update();
-    });
-
-    return elementBody;
 }
 
 function popup_auth(){

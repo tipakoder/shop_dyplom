@@ -34,8 +34,8 @@
 						<button class="btn" onclick="product_sale_off(<?=$product["id"]?>)"><i class="fas fa-store-slash"></i>Снять с продаж</button>
 						<button class="btn filled"><i class="fas fa-pen"></i>Редактировать</button>
 					<?php }else{ ?>
-						<button class="btn" <?=($product['on_sale'] == 'n') ? "disabled" : "" ?>><i class="fas fa-heart"></i>В избранное</button>
-						<button class="btn filled" <?=($product['on_sale'] == 'n') ? "disabled" : "" ?>><i class="fas fa-shopping-cart"></i>Добавить в корзину</button>
+						<button data-id="<?=$product["id"]?>" class="btn event-add-favorite" <?=($product['on_sale'] == 'n') ? "disabled" : "" ?>><i class="fas fa-heart"></i>В избранное</button>
+						<button data-id="<?=$product["id"]?>" class="btn filled event-add-cart" <?=($product['on_sale'] == 'n') ? "disabled" : "" ?>><i class="fas fa-shopping-cart"></i>Добавить в корзину</button>
 					<?php } ?>
 				</div>
 			</div>

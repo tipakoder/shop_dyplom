@@ -375,13 +375,39 @@ function product_edit(id){
 
 		    <div class="form-actions">
 		        <button name="remove-product" class="btn gray">Удалить</button>
-		        <button class="btn gray filled">Добавить</button>
+		        <button name="save-product" class="btn gray filled">Сохранить</button>
 		    </div>
 		    `;
 		    // Удаление товара
 		    form.querySelector("[name=remove-product]").addEventListener("click", (e) => {
 		    	e.preventDefault();
 		    	product_remove(id);
+		    });
+		    // Сохранить продукт
+		    form.querySelector("[name=save-product]").addEventListener("click", (e) => {
+		    	e.preventDefault();
+		    	let body = new FormData(form);
+		    	// Добавление photo_id's
+		    	if(body.get("photo1") && photos[0]) body.append("photo1_id", photos[0].id);
+		    	if(body.get("photo2") && photos[1]) body.append("photo2_id", photos[1].id);
+		    	if(body.get("photo3") && photos[2]) body.append("photo3_id", photos[2].id);
+		    	// Добавление id товара
+				body.append("id", id);
+				// Отправить запрос
+		    	fetch("/editProductProcess/", {
+		            body: body,
+		            method: "POST"
+		        }).then(async(res) => {
+		            return await res.json();
+		        }).then((data) => {
+		            if(data.type == "error"){
+		                alert(data.data);
+		            } else {
+		                location.reload();
+		            }
+		        }).catch((error) => {
+		            console.log(error);
+		        });
 		    });
 		    // Действие по изменению категории
 		    form.querySelector("[name=category]").addEventListener("change", () => {
@@ -462,10 +488,6 @@ function product_edit(id){
 		    	} else if(form.querySelector("[name=subcategoryName]")) {
 		    		form.querySelector("[name=subcategoryName]").remove();
 		    	}
-		    });
-		    // Кастомная отправка всей формы в нужном формате
-		    submit_form(form, "/newProduct/", () => {
-		        location.reload();
 		    });
 		    // Активировать все кастомные элементы формы
 		    active_form(form);
