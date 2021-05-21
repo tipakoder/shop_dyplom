@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 17 2021 г., 07:02
+-- Время создания: Май 21 2021 г., 08:17
 -- Версия сервера: 8.0.19
 -- Версия PHP: 8.0.1
 
@@ -68,7 +68,9 @@ INSERT INTO `account_session` (`id`, `account_id`, `sessionkey`, `timestamp`, `i
 (1, 1, 'c4bf98fb423fd34bdc880e0859bec1905dbb2bf1a8416537cc59a184abb88af6', 1621138167, '', 1),
 (2, 1, '7b4a7af54b700715836ad77340bbfbfe63927ab2c3c904e858c536125c5b5115', 1621141757, '127.0.0.1', 1),
 (3, 2, 'cf370dca39e43c53607d189b30574b2b63f70011853ffe0215f2a54ea6a91702', 1621149321, '127.0.0.1', 0),
-(4, 1, '803699439a0a2e6290e33ab85d6e5fee0a97caeafa9657a2a29a04b9a1773198', 1621191411, '127.0.0.1', 0);
+(4, 1, '803699439a0a2e6290e33ab85d6e5fee0a97caeafa9657a2a29a04b9a1773198', 1621191411, '127.0.0.1', 0),
+(5, 1, 'a567eeef02cf3e2b3ad1b37a64e4f829c038f66d7f4b30853505176853124cc4', 1621451858, '127.0.0.1', 0),
+(6, 2, '72f852d46015caa9928d89bb3880812e38d481c8e15f7eea1e926d0edf54206a', 1621452046, '127.0.0.1', 0);
 
 -- --------------------------------------------------------
 
@@ -101,15 +103,17 @@ INSERT INTO `category` (`id`, `name`) VALUES
 CREATE TABLE `delivery_service` (
   `id` int NOT NULL,
   `name` varchar(25) COLLATE utf8mb4_general_ci NOT NULL,
-  `title` varchar(45) COLLATE utf8mb4_general_ci NOT NULL
+  `title` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
+  `min_price` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `delivery_service`
 --
 
-INSERT INTO `delivery_service` (`id`, `name`, `title`) VALUES
-(2, 'cdek', 'СДЕК');
+INSERT INTO `delivery_service` (`id`, `name`, `title`, `min_price`) VALUES
+(2, 'cdek', 'СДЕК', 350),
+(3, 'delivery', 'Delivery Club', 150);
 
 -- --------------------------------------------------------
 
@@ -120,13 +124,25 @@ INSERT INTO `delivery_service` (`id`, `name`, `title`) VALUES
 CREATE TABLE `orders` (
   `id` int NOT NULL,
   `delivery_service_id` int NOT NULL,
-  `address` int NOT NULL,
+  `address` varchar(120) COLLATE utf8mb4_general_ci NOT NULL,
   `name` varchar(120) COLLATE utf8mb4_general_ci NOT NULL,
   `phone` varchar(12) COLLATE utf8mb4_general_ci NOT NULL,
   `email` varchar(120) COLLATE utf8mb4_general_ci NOT NULL,
-  `promocode_id` int NOT NULL,
+  `promocode_id` int DEFAULT '0',
   `notes` text COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `orders`
+--
+
+INSERT INTO `orders` (`id`, `delivery_service_id`, `address`, `name`, `phone`, `email`, `promocode_id`, `notes`) VALUES
+(3, 2, 'г. Москва, ул. Добровольная, д. 19', 'Никита', '89878679910', 'staryliss.nikita.2004@gmail.com', 1, ''),
+(4, 2, 'г. Москва, ул. Добровольная, д. 19', 'Никита', '89878979910', 'staryliss.nikita.2004@gmail.com', 1, ''),
+(5, 2, 'г. Москва, ул. Добровольная, д. 19', 'Никита', '89878979910', 'staryliss.nikita.2004@gmail.com', 1, ''),
+(6, 2, 'г. Москва, ул. Добровольная, д. 19', 'Никита', '89878979910', 'staryliss.nikita.2004@gmail.com', 1, ''),
+(7, 2, 'г. Москва, ул. Добровольная, д. 19', 'Никита', '89878979910', 'staryliss.nikita.2004@gmail.com', 1, ''),
+(8, 2, 'г. Москва, ул. Добровольная, д. 19', 'Никита', '89878979910', 'staryliss.nikita.2004@gmail.com', 1, '');
 
 -- --------------------------------------------------------
 
@@ -136,8 +152,17 @@ CREATE TABLE `orders` (
 
 CREATE TABLE `orders_product` (
   `orders_id` int NOT NULL,
-  `product_id` int NOT NULL
+  `product_id` int NOT NULL,
+  `count` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `orders_product`
+--
+
+INSERT INTO `orders_product` (`orders_id`, `product_id`, `count`) VALUES
+(8, 20, 1),
+(8, 21, 1);
 
 -- --------------------------------------------------------
 
@@ -169,8 +194,8 @@ INSERT INTO `product` (`id`, `name`, `photo`, `description`, `price`, `on_sale`)
 (19, 'ТЕРМОБЕЛЬЕ 5.11 ESDY', '/content/1621205416_product.jpg', 'Материал: 100% полиэстер\r\n\r\nОсобенности: плотно прилегает к телу и пропускает влагу, защищает от ветра. Термобельё 5.11 отлично подходит для повседневного ношения. Не натирающие плоские швы позволяют максимально комфортно использовать бельё, а анатомический крой не стесняет движений. В местах наибольшего отведения влаги расположены быстросохнущие вставки.\r\n\r\nТермобельё 5.11 изготовлено из износоустойчивого материала в состав которого входит спандекс, нейлон и полиэстер.\r\n', 2100, 'y'),
 (20, 'ТАКТИЧЕСКИЕ ПЕРЧАТКИ MECHANIX БЕСПАЛЫЕ ', '/content/1621205520_product.jpg', 'Тактические перчатки Mechanix M-Pact Black - одна из самых популярных моделей от компании Mechanix Wear. Многолетний опыт Mechanix Wear позволяет разрабатывать и производить модели с высоким уровнем функциональности и надежной защиты кистей рук. Верхняя часть перчатки изготовлена из эластичного материала (спандекса). Фиксация на кисти обеспечивается липучкой из эластичной термостойкой резины. Материал на ладони – прочная искусственная кожа (65% нейлон, 35% полиуретан).\r\n\r\nРазмеры: М, L.\r\n', 800, 'y'),
 (21, 'ПОЯСНАЯ ТАКТИЧЕСКАЯ СУМКА', '/content/1621205585_product.jpg', 'Размер: Длина 20 см\r\nВысота 15 см\r\nТолщина 5 см\r\nВес: 0.42 кг\r\n', 1190, 'y'),
-(22, 'СКОТЧ', '/content/1621205679_product.jpg', 'В продажу поступил специальный скотч защитного цвета. Он предназначен для оклейки любых частей ружья с целью маскировки и защиты от внешних повреждений, царапин и истирания. Состоит из нескольких слоёв. Очень прочный на разрыв и водонепроницаемый. Не оставляет после себя следов клея на поверхности. \r\n\r\nВ наличии имеются несколько видов раскраски: At-digital, woodland, desert, urban, oliv, cp, acu, hunterbrown. Ширина скотча 50 мм, длина - 4,5 метра, 5 метров☆\r\n\r\n- Цвет: Multicam\r\n- Цвет: Flecktarn', 600, 'y'),
-(23, 'БЕЙСБОЛКА UNDER ARMOUR', '/content/1621205783_product.jpg', 'Имиджевые (пафосные) бейсболки. По сути представляют собой классические кепки с козырьком, изготовленные из легкого дышащего материала. На внешней части вышиты соответствующие надписи – рисунки. Предназначены для повседневного ношения в условиях жаркого климата или в летний период, т.к. отлично прикрывают глаза от прямых солнечных лучей. Тактические варианты бейсболок часто используют РМС (частные военные структуры), а также полицейские подразделения как часть униформы.\r\n\r\nУдобная конструкция ;\r\nБольшой козырек;\r\nДля жаркого климата\r\n\r\nЦвет: Черная Олива \r\n', 650, 'y');
+(22, 'Скотч', '/content/1621453818_product.jpg', 'В продажу поступил специальный скотч защитного цвета. Он предназначен для оклейки любых частей ружья с целью маскировки и защиты от внешних повреждений, царапин и истирания. Состоит из нескольких слоёв. Очень прочный на разрыв и водонепроницаемый. Не оставляет после себя следов клея на поверхности. \r\n\r\nВ наличии имеются несколько видов раскраски: At-digital, woodland, desert, urban, oliv, cp, acu, hunterbrown. Ширина скотча 50 мм, длина - 4,5 метра, 5 метров\r\n\r\n- Цвет: Multicam\r\n- Цвет: Flecktarn', 600, 'y'),
+(23, 'БЕЙСБОЛКА UNDER ARMOUR', '/content/1621205783_product.jpg', 'Имиджевые (пафосные) бейсболки. По сути представляют собой классические кепки с козырьком, изготовленные из легкого дышащего материала. На внешней части вышиты соответствующие надписи – рисунки. Предназначены для повседневного ношения в условиях жаркого климата или в летний период, т.к. отлично прикрывают глаза от прямых солнечных лучей. Тактические варианты бейсболок часто используют РМС (частные военные структуры), а также полицейские подразделения как часть униформы.\r\n\r\nПлюсы:\r\n- Удобная конструкция \r\n- Большой козырек\r\n- Для жаркого климата\r\n\r\nЦвет: Черная Олива \r\n', 650, 'y');
 
 -- --------------------------------------------------------
 
@@ -233,8 +258,8 @@ INSERT INTO `product_photo` (`id`, `product_id`, `path`) VALUES
 (14, 18, '/content/18/1621205169_0.jpg'),
 (15, 19, '/content/19/1621205416_0.jpg'),
 (16, 20, '/content/20/1621205520_0.jpg'),
-(17, 23, '/content/23/1621205784_0.jpg'),
-(18, 23, '/content/23/1621205784_1.jpg');
+(17, 23, '/content/23/1621453963_0.jpg'),
+(18, 23, '/content/23/1621453963_1.jpg');
 
 -- --------------------------------------------------------
 
@@ -254,7 +279,7 @@ CREATE TABLE `promocode` (
 --
 
 INSERT INTO `promocode` (`id`, `code`, `percent`, `active`) VALUES
-(1, 'SHERLOCK', 15, 'n'),
+(1, 'CLIENT', 1, 'y'),
 (2, 'SHERLOCK', 15, 'n');
 
 -- --------------------------------------------------------
@@ -376,7 +401,7 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT для таблицы `account_session`
 --
 ALTER TABLE `account_session`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `category`
@@ -388,13 +413,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT для таблицы `delivery_service`
 --
 ALTER TABLE `delivery_service`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `product`
