@@ -27,8 +27,8 @@ function reg(){
 	$login = verify_field("Логин", $currentOptions['login'], 4, 45, "@,#,$,%,^,*,;,',`,!");
 	$password = password_hash(verify_field("Пароль", $currentOptions['password'], 4, 0), PASSWORD_DEFAULT);
 
-	if($query = dbQueryOne("SELECT id, password FROM account WHERE login = '{$login}'")){
-		send_answer(["Аккаунт с введённым логином уже существует"]);
+	if($query = dbQueryOne("SELECT id, password FROM account WHERE login = '{$login}' OR email = '{$email}'")){
+		send_answer(["Аккаунт с введённым логином или эл. почтой уже существует"]);
 	}
 
 	if( !dbExecute("INSERT INTO account (name, email, telephone, login, password) VALUES ('{$name}', '{$email}', '{$telephone}', '{$login}', '{$password}')") ){

@@ -367,12 +367,9 @@
 /* PROFILE PAGE */
 
 #profile .userbox{
-    background-color: #fff;
-    padding: 32px;
-    border-radius: 4px;
-
     display: flex;
-    grid-gap: 32px;
+    align-items: flex-start;
+    grid-gap: 24px;
 }
 
 #profile .userbox i{
@@ -395,9 +392,39 @@
     display: flex;
     flex-direction: column;
     grid-gap: 16px;
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 4px;
 }
 
 #profile .userbox .column.maininfo{
+    grid-gap: 8px;
+    width: 100%;
+}
+
+#profile .userbox .column.maininfo .orders-wrapper{
+    display: flex;
+    flex-direction: column;
+    grid-gap: 8px;
+    margin-top: 16px;
+}
+
+#profile .userbox .column.maininfo .orders-list{
+    display: flex;
+    flex-direction: column;
+    background-color: #ddd;
+    grid-gap: 1px;
+}
+
+#profile .userbox .column.maininfo .orders-list .order-card{
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+#profile .userbox .column.maininfo .orders-list .order-card > div{
+    display: flex;
+    flex-direction: column;
     grid-gap: 8px;
 }
 
