@@ -104,6 +104,36 @@ function prepare_new_order(){
 	send_answer(["userData" => $currentUser, "deliverys" => $deliverys], true);
 }
 
+function new_order(){
+	global $currentOptions, $currentUser;
+	$address = verify_field("Адрес", $currentOptions['address'], 4, 120);
+	$delivery_id = verify_field("Служба доставки", $currentOptions['delivery'], 1, 11);
+	$promocode = verify_field("Промокод", $currentOptions['promocode'], 0, 120);
+	$promocode_id = ($query = dbQueryOne("SELECT id FROM promocode WHERE code = '{$promocode}'")) ? $query['id'] : 1;
+	$name = verify_field("Имя", $currentOptions['name'], 4, 120);
+	$email = verify_field("Email", $currentOptions['email'], 4, 120);
+	$phone = verify_field("Телефон", $currentOptions['phone'], 4, 120);
+	$notes = ($currentOptions['notes'] != null) ? verify_field("Комментарий к заказу", $currentOptions['notes'], 0, 600) : "";
+	$items = ($currentOptions['items']) ? json_decode($currentOptions['items'], true) : send_answer(["Предметы не обнаруженны"]);
+	// Записываем новый заказ в базу
+	if(!dbExecute("INSERT INTO orders (address, delivery_service_id, name, phone, email, promocode_id, notes) VALUES ('{$address}', '{$delivery_id}', '{$name}', '{$phone}', '{$email}', '{$promocode_id}', '{$notes}')")){
+		send_answer(["Неизвестная ошибка создания нового заказа"]);
+	}
+	// Добавляем предметы к заказу
+	$order_id = dbLastId();
+	$sql_to_execute = "INSERT INTO orders_product (orders_id, product_id, count) VALUES ";
+	$i = 0;
+	foreach($items as $item){
+		$sql_to_execute .= "('{$order_id}', '{$item['id']}', '{$item['count']}')";
+		if(count($items)-1 > $i) $sql_to_execute .= ", ";
+		$i++;
+	}
+	if(!dbExecute($sql_to_execute)){
+		send_answer(["Неизвестная ошибка связи предметов с новым заказом"]);
+	}
+	send_answer(["order_id" => $order_id], true);
+}
+
 // ---------------------- ADMIN
 
 function new_promocode(){
@@ -144,8 +174,9 @@ function new_delivery_service(){
 
 	$name = verify_field("Кодовое имя", $currentOptions['name'], 1, 25);
 	$title = verify_field("Заголовок", $currentOptions['title'], 1, 45);
+	$min_price = verify_field("Минимальная цена", $currentOptions['min_price'], 1, 45);
 
-	if(dbExecute("INSERT INTO delivery_service (name, title) VALUES ('{$name}', '{$title}')")){
+	if(dbExecute("INSERT INTO delivery_service (name, title, min_price) VALUES ('{$name}', '{$title}', '{$min_price}')")){
 		send_answer([], true);
 	}
 

@@ -59,6 +59,10 @@ function popup_new_delivery_service(){
         <input name="title" type="text" placeholder="Название" required>
     </div>
 
+    <div class="field">
+        <input name="min_price" type="number" placeholder="Минимальная цена доставки" min="100" max="100000" required>
+    </div>
+
     <div class="form-actions">
         <button class="btn gray filled">Добавить</button>
     </div>

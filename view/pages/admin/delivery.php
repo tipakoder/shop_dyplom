@@ -13,6 +13,7 @@
 				<tr>
 					<th>Кодовое имя</th>
 					<th>Название</th>
+					<th>Минимальная цена</th>
 					<th class="action">Действие</th>
 				</tr>
 
@@ -20,6 +21,7 @@
 			    <tr>
 					<td><?=$delivery_service['name']?></td>
 					<td><?=$delivery_service['title']?></td>
+					<td><?=$delivery_service['min_price']?></td>
 					<td class="action"><button onclick="remove_delivery_service(<?=$delivery_service['id']?>)" class="btn gray filled">Удалить</button></td>
 				</tr>
 				<?php endforeach; ?>

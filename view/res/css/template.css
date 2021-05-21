@@ -96,6 +96,46 @@
     margin-right: 8px;
 }
 
+/* CARDS */
+
+.cards-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 8px;
+}
+
+.cards-container .card-wrapper{
+    background-color: #e2e2e2;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.cards-container .card-wrapper .content{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 8px;
+    margin-top: 0 !important;
+}
+
+.cards-container .card-wrapper .phone i{
+    margin-right: 8px;  
+}
+
+.cards-container .card-wrapper .action{
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;
+    color: #FFF;
+    cursor: pointer;
+}
+
+.cards-container .card-wrapper .action i{
+    margin-left: 8px;
+}
+
 /* HOVER BLOCK */
 
 .hover-block{
@@ -425,4 +465,12 @@
     padding: 1px 0px 1px 0px;
     grid-template-columns: repeat(3, minmax(auto, 1fr));
     background-color: #ddd;
+}
+
+/* ORDERS ADMIN */
+
+/* ORDER PAGE */
+
+#order-page > .container{
+    margin: 16px auto;
 }

@@ -89,5 +89,13 @@
         "controller" : "front",
         "function" : "admin_delivery",
         "level_access": 0
+    },
+
+    {
+        "url" : "/order.(\\d+)/",
+        "method" : "get",
+        "controller" : "front",
+        "function" : "order",
+        "regex": true
     }
 ]

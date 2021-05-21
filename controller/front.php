@@ -56,6 +56,15 @@ function product($options){
 	}
 }
 
+// Order page (/order/{id}/)
+function order($options){
+	$order_id = (isset($options[0][1]) && $options[0][1] != null) ? $options[0][1] : 0;
+	if($query = dbQueryOne("SELECT * FROM orders WHERE id = '{$order_id}'")){
+		$items = dbQuery("SELECT * FROM orders_product WHERE product_id = '{$order_id}'");
+		load_view("order", "SHOP.d — Заказ#{$query['id']}", ["order" => $query, "items" => $items]);
+	}
+}
+
 // User profile (/profile/)
 function profile(){
 	global $currentUser;
@@ -84,7 +93,8 @@ function admin_products(){
 
 // Orders page (/admin/orders/)
 function admin_orders(){
-	load_view("admin/orders", "Панель администратора — заказы");
+	$orders = dbQuery("SELECT * FROM orders ORDER BY id DESC");
+	load_view("admin/orders", "Панель администратора — заказы", ["orders" => $orders]);
 }
 
 // Promocodes page (/admin/promocodes/)

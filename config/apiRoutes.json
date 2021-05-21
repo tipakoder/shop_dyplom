@@ -88,7 +88,8 @@
         "level_access": 0,
         "fields": [
             "name",
-            "title"
+            "title",
+            "min_price"
         ]
     },
 
@@ -210,5 +211,20 @@
         "method" : "post",
         "controller" : "api",
         "function" : "prepare_new_order"
+    },
+
+    {
+        "url" : "/newOrder/",
+        "method" : "post",
+        "controller" : "api",
+        "function" : "new_order",
+        "fields": [
+            "address",
+            "delivery",
+            "name",
+            "email",
+            "phone",
+            "items"
+        ]
     }
 ]

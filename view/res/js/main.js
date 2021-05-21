@@ -219,18 +219,37 @@ function popup_new_order(){
             </div>
 
             <div class="field">
-                <textarea name="notes" placeholder="Комментарий к заказу" required></textarea>
+                <textarea name="notes" placeholder="Комментарий к заказу"></textarea>
             </div>
 
             <div class="form-actions">
                 <button class="btn filled">Подтвердить</button>
             </div>
             `;
-            submit_form(form, "/reg/", () => {
-                location.href = "/profile/";
+
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                let body = new FormData(form);
+                body.append("items", JSON.stringify(window.productCartSlots));
+
+                fetch("/newOrder/", {
+                    body: body,
+                    method: "POST"
+                }).then(async(res) => {
+                    return await res.json();
+                }).then((data) => {
+                    if(data.type == "error"){
+                        alert(data.data);
+                    } else {
+                        clear_cart();
+                    }
+                }).catch((error) => {
+                    console.log(error);
+                });
             });
             popup(form, "Оформление заказа");
-        }
+        }   
     }).catch((error) => {
         console.log(error);
     });
