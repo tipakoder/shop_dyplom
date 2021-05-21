@@ -1,5 +1,10 @@
 <section id="promocodes">
 	<div class="container">
+		<div class="section-path">
+            <a class="section" href="/admin/">Админ панель</a>
+            <a class="section" href="/admin/promocodes/">Промокоды</a>
+        </div>
+
 		<div class="section-title">
 			<h3 class="text">Промокоды</h3> 
 			<ul class="submenu">

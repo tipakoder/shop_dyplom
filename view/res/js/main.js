@@ -207,15 +207,15 @@ function popup_new_order(){
             </div>
 
             <div class="field">
-                <input name="name" type="text" placeholder="Имя" required ${(data.data.userData) ? 'value="'+data.data.userData.name+'" disabled' : ""}>
+                <input name="name" type="text" placeholder="Имя" required ${(data.data.userData) ? 'value="'+data.data.userData.name+'"' : ""}>
             </div>
 
             <div class="field">
-                <input name="email" type="email" placeholder="Электронная почта" ${(data.data.userData) ? 'value="'+data.data.userData.email+'" disabled' : ""} required>
+                <input name="email" type="email" placeholder="Электронная почта" ${(data.data.userData) ? 'value="'+data.data.userData.email+'"' : ""} required>
             </div>
 
             <div class="field">
-                <input name="phone" type="tel" placeholder="Телефон" ${(data.data.userData) ? 'value="'+data.data.userData.telephone+'" disabled' : ""} required>
+                <input name="phone" type="tel" placeholder="Телефон" ${(data.data.userData) ? 'value="'+data.data.userData.telephone+'"' : ""} required>
             </div>
 
             <div class="field">
@@ -243,6 +243,7 @@ function popup_new_order(){
                         alert(data.data);
                     } else {
                         clear_cart();
+                        location.href="/order/"+data.data.order_id+"/";
                     }
                 }).catch((error) => {
                     console.log(error);

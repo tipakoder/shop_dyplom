@@ -1,5 +1,10 @@
 <section id="products-admin">
 	<div class="container">
+        <div class="section-path">
+            <a class="section" href="/admin/">Админ панель</a>
+            <a class="section" href="/admin/products/">Продукты</a>
+        </div>
+
 		<div class="section-title">
 			<h3 class="text">Товары</h3> 
 			<ul class="submenu">

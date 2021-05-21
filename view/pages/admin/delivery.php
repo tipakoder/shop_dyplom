@@ -1,5 +1,10 @@
 <section id="delivery">
 	<div class="container">
+		<div class="section-path">
+			<a class="section" href="/admin/">Админ панель</a>
+			<a class="section" href="/admin/delivery/">Службы доставки</a>
+		</div>
+
 		<div class="section-title">
 			<h3 class="text">Службы доставки</h3> 
 			<ul class="submenu">

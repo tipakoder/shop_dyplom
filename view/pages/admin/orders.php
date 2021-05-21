@@ -1,5 +1,10 @@
 <section id="orders-admin">
 	<div class="container">
+		<div class="section-path">
+			<a class="section" href="/admin/">Админ панель</a>
+			<a class="section" href="/admin/orders/">Заказы</a>
+		</div>
+
 		<div class="section-title">
 			<h3 class="text">Заказы</h3> 
 		</div>
