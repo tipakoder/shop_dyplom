@@ -222,6 +222,19 @@ function popup_new_order(){
                 <textarea name="notes" placeholder="Комментарий к заказу"></textarea>
             </div>
 
+            <div class="paid-card-wrapper">
+                <div class="row">
+                    <input type="text" name="card-number" class="full" placeholder="Номер карты">
+                </div>
+                <div class="row">
+                    <input type="text" name="card-date" placeholder="Месяц/Год">
+                    <input type="text" name="card-cvc" placeholder="CVC">
+                </div>
+                <div class="row">
+                    <input type="text" name="card-owner" class="full" placeholder="Владелец карты">
+                </div>
+            </div>
+
             <div class="form-actions">
                 <button class="btn filled">Подтвердить</button>
             </div>
@@ -233,6 +246,28 @@ function popup_new_order(){
                 let body = new FormData(form);
                 body.append("items", JSON.stringify(window.productCartSlots));
 
+                // Проверяем поля карт
+                let re_card_number = /^(\d+)$/;
+                let re_card_date = /^(\d+)\/(\d+)$/;
+                let re_card_cvc = /^(\d+)$/;
+                let re_card_owner = /^(\w+) (\w+)$/;
+                if(!re_card_number.test(body.get("card-number"))){
+                    alert("Номер карты введён неверно");
+                    return;
+                }
+                if(!re_card_date.test(body.get("card-date"))){
+                    alert("Месяц/год введён неверно");
+                    return;
+                }
+                if(!re_card_cvc.test(body.get("card-cvc"))){
+                    alert("CVC введён неверно");
+                    return;
+                }
+                if(!re_card_owner.test(body.get("card-owner"))){
+                    alert("Владелец карты введён неверно");
+                    return;
+                }
+
                 fetch("/newOrder/", {
                     body: body,
                     method: "POST"
@@ -243,7 +278,8 @@ function popup_new_order(){
                         alert(data.data);
                     } else {
                         clear_cart();
-                        location.href="/order/"+data.data.order_id+"/";
+                        console.log(data.data)
+                        popup_paid_check(data.data.order_id, data.data.check.id, data.data.check.items, data.data.check.price);
                     }
                 }).catch((error) => {
                     console.log(error);
@@ -254,6 +290,29 @@ function popup_new_order(){
     }).catch((error) => {
         console.log(error);
     });
+}
+
+function popup_paid_check(order_id, id, items, price){
+    let form = document.createElement("div");
+    form.className = "paid-check";
+    form.innerHTML = `
+    <div class="section">
+        <h3 class="section-name">Основная информация</h3>
+        <div class="section-content">
+            <div class="option"><label>Магазин:</label> Shop.d</div>
+            <div class="option"><label>ИНН:</label> 401404311</div>
+            <div class="option"><label>Адрес:</label> http://shop.d/</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-content">
+            <div class="option"><label>Состав:</label> ${items}</div>
+            <div class="option"><label>Итоговая цена:</label> ${price}</div>
+        </div>
+    </div>
+    `;
+    popup(form, "Чек #"+id, () => {location.href="/order/"+order_id+"/";});
 }
 
 function submit_form(form, url, success = console.log, customData = false, method = "POST"){
@@ -284,9 +343,25 @@ function submit_form(form, url, success = console.log, customData = false, metho
     });
 }
 
+HTMLElement.prototype.printMe = printMe;
+
+function printMe(query){
+    var myframe = document.createElement('IFRAME');
+    myframe.domain = document.domain;
+    myframe.style.position = "absolute";
+    myframe.style.top = "-10000px";
+    document.body.appendChild(myframe);
+    myframe.contentDocument.innerHTML = this.innerHTML;
+    setTimeout(function(){
+        myframe.focus();
+        myframe.contentWindow.print();
+        myframe.parentNode.removeChild(myframe) ;
+    }, 3000);
+    window.focus();
+}
+
 document.addEventListener("DOMContentLoaded", ready_adaptive);
 window.addEventListener("load", () => {
-    // Enable body and off loading
     document.getElementById("loading-page").style.animation = "cart-close 0.5s";
     document.body.style.overflow = "auto";
     setTimeout(() => {

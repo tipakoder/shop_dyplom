@@ -115,12 +115,26 @@ function new_order(){
 	$phone = verify_field("Телефон", $currentOptions['phone'], 4, 120);
 	$notes = ($currentOptions['notes'] != null) ? verify_field("Комментарий к заказу", $currentOptions['notes'], 0, 600) : "";
 	$items = ($currentOptions['items']) ? json_decode($currentOptions['items'], true) : send_answer(["Предметы не обнаруженны"]);
+	// Чек
+	$card_number = verify_field("Номер карты", $currentOptions['card-number'], 4, 16);
+	$card_date = verify_field("Срок", $currentOptions['card-date'], 4, 5);
+	$card_cvc = verify_field("CVC код", $currentOptions['card-cvc'], 3, 120);
+	$card_owner = verify_field("Владелец", $currentOptions['card-owner'], 4, 255);
+	$total_price = 0;
+	$items_name = "";
+	$i = 0;
+	foreach ($items as $item) {
+		$total_price += intval($item['price']) * intval($item['count']);
+		$items_name .= $item['name']."<b>({$item['price']}x{$item['count']})</b>";
+		if(count($items)-1 > $i) $items_name .= ", ";
+		$i++;
+	}
 	// Записываем новый заказ в базу
 	if(!dbExecute("INSERT INTO orders (address, delivery_service_id, name, phone, email, promocode_id, notes) VALUES ('{$address}', '{$delivery_id}', '{$name}', '{$phone}', '{$email}', '{$promocode_id}', '{$notes}')")){
 		send_answer(["Неизвестная ошибка создания нового заказа"]);
 	}
-	// Добавляем предметы к заказу
 	$order_id = dbLastId();
+	// Добавляем предметы к заказу
 	$sql_to_execute = "INSERT INTO orders_product (orders_id, product_id, count) VALUES ";
 	$i = 0;
 	foreach($items as $item){
@@ -131,7 +145,12 @@ function new_order(){
 	if(!dbExecute($sql_to_execute)){
 		send_answer(["Неизвестная ошибка связи предметов с новым заказом"]);
 	}
-	send_answer(["order_id" => $order_id], true);
+	// Добавляем чек
+	if(!dbExecute("INSERT INTO orders_check (card_number, card_date, card_cvc, card_owner, orders_id, total_price) VALUES ('{$card_number}', '{$card_date}', '{$card_cvc}', '{$card_owner}', '{$order_id}', '{$total_price}')")){
+		send_answer(["Неизвестная ошибка оплаты"], false);
+	}
+	$check_id = dbLastId();
+	send_answer(["order_id" => $order_id, "check" => ["id" => $check_id, "items" => $items_name, "price" => $total_price]], true);
 }
 
 // ---------------------- ADMIN

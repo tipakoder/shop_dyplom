@@ -1,6 +1,6 @@
 (function(){
     // Функция показа модального окна
-    window.popup = function(element, title){
+    window.popup = function(element, title, onClose = () => {}){
         // Если есть открыте модальные окна - закрываем их
         if(document.getElementById("popup-wrapper")) document.getElementById("popup-wrapper").remove();
         // Создаём элемент модального окна
@@ -20,6 +20,8 @@
         // Задаём элемент контента
         element.classList.add("popup-content");
         popupWrapper.querySelector(".popup-window").appendChild(element);
+        // Добавляем действие при закрытии
+        popupWrapper.addEventListener("close", onClose);
         // Показываем
         document.body.style.overflow = 'hidden';
         document.querySelector("#page-wrapper").classList.add("popup-active");
@@ -35,6 +37,7 @@
         document.getElementById("page-wrapper").classList.remove("popup-active");
         document.body.style.overflow = 'auto';
         setTimeout(() => { 
+            document.getElementById("popup-wrapper").dispatchEvent(new Event('close'));
             document.getElementById("popup-wrapper").remove(); 
         }, 300);
         window.popupShowed = false;

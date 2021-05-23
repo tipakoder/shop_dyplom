@@ -31,6 +31,12 @@
 				<div class="field">
 					<input type="email" value="<?=$order['email']?>" disabled>
 				</div>
+
+				<?php if($order['paid'] == 'n'): ?>
+					<button class="btn filled">Оплатить</button>
+				<?php else: ?>
+					<div class="paid-success"><i class="far fa-check-circle"></i> Успешная оплата</div>
+				<?php endif; ?>
 			</div>
 
 			<div class="items-wrapper">
