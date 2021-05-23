@@ -1,9 +1,19 @@
 <section id="order-page">
 	<div class="container">
-		<div class="section-path">
-			<a class="section" href="/admin/orders/">Заказы</a>
-			<a class="section" href="#">Заказ #<?=$order['id']?></a>
-		</div>
+		<?php if($AUTH): ?>
+			<?php if($SYS_LEVELACCESS == 0): ?>
+			<div class="section-path">
+				<a class="section" href="/admin/">Админ панель</a>
+				<a class="section" href="/admin/orders/">Заказы</a>
+				<a class="section" href="#">Заказ #<?=$order['id']?></a>
+			</div>
+			<?php else: ?>
+				<div class="section-path">
+					<a class="section" href="/profile/">Личный кабинет</a>
+					<a class="section" href="#">Заказ #<?=$order['id']?></a>
+				</div>
+			<?php endif; ?>
+		<?php endif; ?>
 
 		<h2 class="section-title">Заказ #<?=$order['id']?></h2>
 

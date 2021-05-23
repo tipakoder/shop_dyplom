@@ -1,9 +1,22 @@
 <section id="product-page">
 	<div class="container">
-		<div class="section-path">
-			<a class="section" href="/search?category=<?=$product['category_id']?>"><?=$product['category']?></a>
-			<a class="section"  href="/search?category=<?=$product['category_id']."&subcategory=".$product['subcategory_id']?>"><?=$product['subcategory']?></a>
-		</div>
+		<?php if($AUTH): ?>
+			<?php if($SYS_LEVELACCESS == 0): ?>
+				<div class="section-path">
+					<a class="section" href="/admin/">Админ панель</a>
+					<a class="section" href="/admin/products/">Заказы</a>
+					<a class="section" href="#"><?=$product['name']?></a>
+				</div>
+			<?php else: ?>
+				<div class="section-path">
+					<a class="section" href="/search">Поиск</a>
+					<a class="section" href="/search?category=<?=$product['category_id']?>"><?=$product['category']?></a>
+					<a class="section"  href="/search?category=<?=$product['category_id']."&subcategory=".$product['subcategory_id']?>"><?=$product['subcategory']?></a>
+					<a class="section" href="#"><?=$product['name']?></a>
+				</div>
+			<?php endif; ?>
+		<?php endif; ?>
+		
 
 		<div class="content">
 			<div class="slider-wrapper">
@@ -34,7 +47,7 @@
 					<?php if($SYS_LEVELACCESS == 0){ ?>
 						<button class="btn gray" onclick="product_remove(<?=$product["id"]?>)"><i class="fas fa-trash"></i>Удалить</button>
 						<button class="btn gray" onclick="product_sale_off(<?=$product["id"]?>)"><i class="fas fa-store-slash"></i>Снять с продаж</button>
-						<button class="btn gray filled"><i class="fas fa-pen"></i>Редактировать</button>
+						<button class="btn gray filled" onclick="product_edit(<?=$product['id']?>)"><i class="fas fa-pen"></i>Редактировать</button>
 					<?php }else{ ?>
 						<button data-id="<?=$product["id"]?>" class="btn gray event-add-favorite" <?=($product['on_sale'] == 'n') ? "disabled" : "" ?>><i class="fas fa-heart"></i>В избранное</button>
 						<div class="count-bar">

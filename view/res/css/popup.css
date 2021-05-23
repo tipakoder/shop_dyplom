@@ -1,10 +1,12 @@
 #page-wrapper{
     height: 100%;
     position: relative;
+    margin-top: 84px;
 }
 
 #page-wrapper.popup-active{
     filter: blur(10px);
+    margin-top: 0px;
 }
 
 #popup-wrapper{

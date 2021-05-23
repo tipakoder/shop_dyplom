@@ -414,12 +414,14 @@
     flex-direction: column;
     background-color: #ddd;
     grid-gap: 1px;
+    padding: 1px;
 }
 
 #profile .userbox .column.maininfo .orders-list .order-card{
     display: flex;
     justify-content: space-between;
     padding: 16px;
+    background-color: #fff;
 }
 
 #profile .userbox .column.maininfo .orders-list .order-card > div{
