@@ -1,10 +1,8 @@
 <section id="best-deals">
     <div class="container">
         <div class="section-title">
-            <h3 class="text">Лучшие предложения</h3> 
-            <ul class="submenu switch">
-                <li class="selected" onclick="load_products('news')">Новинки</li>
-                <li onclick="load_products('hits')">Хиты</li>
+            <h3 class="text">Новинки</h3> 
+            <ul class="submenu">
                 <li><a href="/search">Весь каталог</a></li>
             </ul>
         </div>
@@ -35,7 +33,7 @@
     </div>
 </section>
 
-<section id="previously-watched" class="background">
+<!-- <section id="previously-watched" class="background">
     <div class="container">
         <div class="section-title">Ранее вы смотрели</div>
         <div class="content">
@@ -52,4 +50,4 @@
             <div class="block"></div>
         </div>
     </div>
-</section>
+</section> -->
