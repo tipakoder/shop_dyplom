@@ -74,13 +74,15 @@ function profile(){
 		$fullprice = 0;
 		$orders_name = "";
 		$orders_items = dbQuery("SELECT product.name, product.price, orders_product.count FROM orders_product, product WHERE orders_product.orders_id = '{$order['id']}' AND product.id = orders_product.product_id");
-		for($i = 0; $i < count($orders_items); $i++){
-			$fullprice += $orders_items[$i]['price'] * $orders_items[$i]['count'];
-			$orders_name .= $orders_items[$i]['name'];
-			if(count($orders_items)-1 > $i) $orders_name .= ", ";
+		if($orders_items){
+			for($i = 0; $i < count($orders_items); $i++){
+				$fullprice += $orders_items[$i]['price'] * $orders_items[$i]['count'];
+				$orders_name .= $orders_items[$i]['name'];
+				if(count($orders_items)-1 > $i) $orders_name .= ", ";
+			}
+			$orders[$key]['price'] = $fullprice;
+			$orders[$key]['items'] = $orders_name;
 		}
-		$orders[$key]['price'] = $fullprice;
-		$orders[$key]['items'] = $orders_name;
 	}
 	load_view("profile", "Личный кабинет — ".$currentUser['name'], ["orders" => $orders]);
 }

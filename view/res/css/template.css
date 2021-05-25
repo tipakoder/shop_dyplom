@@ -72,12 +72,22 @@
 
 .catalog-container > .product > .product-wrapper .submenu .actions{
     display: flex;
-    flex-direction: column;
     grid-gap: 8px;
 }
 
+.catalog-container > .product > .product-wrapper .submenu .actions > *{
+    width: 100%;
+}
+
+.catalog-container > .product > .product-wrapper .submenu .actions .icon{
+    width: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .catalog-container > .product > .product-wrapper .submenu .actions i{
-    margin-right: 4px;
+    margin-right: 0px;
 }
 
 .catalog-container > .product > .product-wrapper .submenu .actions .close{

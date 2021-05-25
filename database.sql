@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 21 2021 г., 08:17
+-- Время создания: Май 24 2021 г., 07:11
 -- Версия сервера: 8.0.19
 -- Версия PHP: 8.0.1
 
@@ -70,7 +70,8 @@ INSERT INTO `account_session` (`id`, `account_id`, `sessionkey`, `timestamp`, `i
 (3, 2, 'cf370dca39e43c53607d189b30574b2b63f70011853ffe0215f2a54ea6a91702', 1621149321, '127.0.0.1', 0),
 (4, 1, '803699439a0a2e6290e33ab85d6e5fee0a97caeafa9657a2a29a04b9a1773198', 1621191411, '127.0.0.1', 0),
 (5, 1, 'a567eeef02cf3e2b3ad1b37a64e4f829c038f66d7f4b30853505176853124cc4', 1621451858, '127.0.0.1', 0),
-(6, 2, '72f852d46015caa9928d89bb3880812e38d481c8e15f7eea1e926d0edf54206a', 1621452046, '127.0.0.1', 0);
+(6, 2, '72f852d46015caa9928d89bb3880812e38d481c8e15f7eea1e926d0edf54206a', 1621452046, '127.0.0.1', 0),
+(7, 2, 'fd8322edb554f377b76e8542093158798c4425570c885fa280fc3fe6203fe55b', 1621634079, '127.0.0.1', 1);
 
 -- --------------------------------------------------------
 
@@ -129,20 +130,54 @@ CREATE TABLE `orders` (
   `phone` varchar(12) COLLATE utf8mb4_general_ci NOT NULL,
   `email` varchar(120) COLLATE utf8mb4_general_ci NOT NULL,
   `promocode_id` int DEFAULT '0',
-  `notes` text COLLATE utf8mb4_general_ci
+  `notes` text COLLATE utf8mb4_general_ci,
+  `paid` enum('y','n') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'n'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `orders`
 --
 
-INSERT INTO `orders` (`id`, `delivery_service_id`, `address`, `name`, `phone`, `email`, `promocode_id`, `notes`) VALUES
-(3, 2, 'г. Москва, ул. Добровольная, д. 19', 'Никита', '89878679910', 'staryliss.nikita.2004@gmail.com', 1, ''),
-(4, 2, 'г. Москва, ул. Добровольная, д. 19', 'Никита', '89878979910', 'staryliss.nikita.2004@gmail.com', 1, ''),
-(5, 2, 'г. Москва, ул. Добровольная, д. 19', 'Никита', '89878979910', 'staryliss.nikita.2004@gmail.com', 1, ''),
-(6, 2, 'г. Москва, ул. Добровольная, д. 19', 'Никита', '89878979910', 'staryliss.nikita.2004@gmail.com', 1, ''),
-(7, 2, 'г. Москва, ул. Добровольная, д. 19', 'Никита', '89878979910', 'staryliss.nikita.2004@gmail.com', 1, ''),
-(8, 2, 'г. Москва, ул. Добровольная, д. 19', 'Никита', '89878979910', 'staryliss.nikita.2004@gmail.com', 1, '');
+INSERT INTO `orders` (`id`, `delivery_service_id`, `address`, `name`, `phone`, `email`, `promocode_id`, `notes`, `paid`) VALUES
+(3, 2, 'г. Москва, ул. Добровольная, д. 19', 'Никита', '89878679910', 'staryliss.nikita.2004@gmail.com', 1, '', 'n'),
+(4, 2, 'г. Москва, ул. Добровольная, д. 19', 'Никита', '89878979910', 'staryliss.nikita.2004@gmail.com', 1, '', 'n'),
+(5, 2, 'г. Москва, ул. Добровольная, д. 19', 'Никита', '89878979910', 'staryliss.nikita.2004@gmail.com', 1, '', 'n'),
+(6, 2, 'г. Москва, ул. Добровольная, д. 19', 'Никита', '89878979910', 'staryliss.nikita.2004@gmail.com', 1, '', 'n'),
+(7, 2, 'г. Москва, ул. Добровольная, д. 19', 'Никита', '89878979910', 'staryliss.nikita.2004@gmail.com', 1, '', 'n'),
+(8, 2, 'г. Москва, ул. Добровольная, д. 19', 'Никита', '89878979910', 'staryliss.nikita.2004@gmail.com', 1, '', 'n'),
+(9, 3, 'г. Оренбург, ул. Добровольская, д. 15', 'Данил', '89198460573', 'pepega@gmail.com', 2, 'Нормас упакуйте ', 'y'),
+(10, 3, 'фывфыв', 'Данил', '89198460573', 'pepega@gmail.com', 1, '12312', 'n'),
+(11, 3, 'фывфыв', 'Данил', '89198460573', 'pepega@gmail.com', 1, '12312', 'n'),
+(12, 2, 'asdasd', 'Данил', '89198460573', 'pepega@gmail.com', 1, 'asdasdasd', 'n'),
+(13, 2, 'asdasd', 'Данил', '89198460573', 'pepega@gmail.com', 1, 'asdasdasd', 'n'),
+(14, 2, 'asdasd', 'Данил', '89198460573', 'pepega@gmail.com', 1, 'asdasdasd', 'n'),
+(15, 2, 'asdasd', 'Данил', '89198460573', 'pepega@gmail.com', 1, 'asdasdasd', 'n'),
+(16, 2, 'asdasd', 'Данил', '89198460573', 'pepega@gmail.com', 1, 'asdasdasd', 'n'),
+(17, 2, 'фывфыв', 'Данил', '89198460573', 'pepega@gmail.com', 1, '123123', 'n');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `orders_check`
+--
+
+CREATE TABLE `orders_check` (
+  `id` int NOT NULL,
+  `orders_id` int NOT NULL,
+  `card_number` varchar(16) COLLATE utf8mb4_general_ci NOT NULL,
+  `card_date` varchar(5) COLLATE utf8mb4_general_ci NOT NULL,
+  `card_cvc` int NOT NULL,
+  `card_owner` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `total_price` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `orders_check`
+--
+
+INSERT INTO `orders_check` (`id`, `orders_id`, `card_number`, `card_date`, `card_cvc`, `card_owner`, `total_price`) VALUES
+(1, 16, '521312123', '12/12', 123, '123123 123123', 1990),
+(2, 17, '123124112412313', '12/12', 123, '123 123', 2440);
 
 -- --------------------------------------------------------
 
@@ -162,7 +197,21 @@ CREATE TABLE `orders_product` (
 
 INSERT INTO `orders_product` (`orders_id`, `product_id`, `count`) VALUES
 (8, 20, 1),
-(8, 21, 1);
+(8, 21, 1),
+(9, 22, 1),
+(9, 21, 1),
+(10, 20, 1),
+(12, 21, 1),
+(12, 22, 1),
+(14, 20, 1),
+(14, 21, 1),
+(15, 20, 1),
+(15, 21, 1),
+(16, 20, 1),
+(16, 21, 1),
+(17, 22, 1),
+(17, 23, 1),
+(17, 21, 1);
 
 -- --------------------------------------------------------
 
@@ -347,6 +396,13 @@ ALTER TABLE `orders`
   ADD KEY `promocode_id` (`promocode_id`);
 
 --
+-- Индексы таблицы `orders_check`
+--
+ALTER TABLE `orders_check`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `orders_id` (`orders_id`);
+
+--
 -- Индексы таблицы `orders_product`
 --
 ALTER TABLE `orders_product`
@@ -401,7 +457,7 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT для таблицы `account_session`
 --
 ALTER TABLE `account_session`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT для таблицы `category`
@@ -419,7 +475,13 @@ ALTER TABLE `delivery_service`
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT для таблицы `orders_check`
+--
+ALTER TABLE `orders_check`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `product`
@@ -461,6 +523,12 @@ ALTER TABLE `account_session`
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`delivery_service_id`) REFERENCES `delivery_service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`promocode_id`) REFERENCES `promocode` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Ограничения внешнего ключа таблицы `orders_check`
+--
+ALTER TABLE `orders_check`
+  ADD CONSTRAINT `orders_check_ibfk_1` FOREIGN KEY (`orders_id`) REFERENCES `orders` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Ограничения внешнего ключа таблицы `orders_product`

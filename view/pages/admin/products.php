@@ -24,10 +24,10 @@
                     </div>
                     <div class="submenu">
                         <div class="actions">
-                            <button class="btn" onclick="location.href='/product/<?=$product['id']?>/';"><i class="fas fa-print"></i> Страница товара</button>
-                            <button class="btn" onclick="product_edit(<?=$product['id']?>)"><i class="fas fa-edit"></i> Редактировать</button>
-                            <button class="btn filled"><i class="fas fa-store-slash"></i> Снять с продаж</button>
-                            <button class="btn gray filled close"><i class="fas fa-times"></i> Закрыть</button>
+                            <button class="btn" onclick="location.href='/product/<?=$product['id']?>/';">Подробнее</button>
+                            <button class="btn icon" onclick="product_edit(<?=$product['id']?>)"><i class="fas fa-edit"></i></button>
+                            <button class="btn icon filled" onclick="product_sale_off(<?=$product["id"]?>)"><i class="fas fa-store-slash"></i></button>
+                            <button class="btn filled close"><i class="fas fa-times"></i> Закрыть</button>
                         </div>
                     </div>
                 </div>

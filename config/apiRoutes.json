@@ -163,7 +163,6 @@
         "method" : "post",
         "controller" : "api",
         "function" : "product_search",
-        "level_access": 0,
         "fields": [
             "query"
         ]

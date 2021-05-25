@@ -107,7 +107,6 @@
     <script src="/view/res/js/search.js"></script>
     <script src="/view/res/js/main.js"></script>
     <script src="/view/res/js/product.js"></script>
-    <script src="/view/res/js/catalog.js"></script>
     <?php if($AUTH){ ?>
         <script src="/view/res/js/user.js"></script>
     <?php } ?>
