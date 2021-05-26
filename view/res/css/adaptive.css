@@ -287,4 +287,16 @@
     #admin-dashboard .table-wrapper{
         grid-template-columns: 1fr;
     }
+
+    /* PRODUCT PAGE */
+
+    #product-page .content{
+        grid-template-columns: 1fr !important;
+    }
+
+    #product-page .content .main-info .actions{
+        flex-direction: column !important;
+        grid-gap: 8px;
+        margin-top: 16px !important;
+    }
 }

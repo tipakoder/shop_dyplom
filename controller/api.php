@@ -401,7 +401,7 @@ function edit_product_process(){
 		if($additional_photos != []){
 			// Создаём папку товара
 			$path_folder = ROOTDIR."/content/{$product_id}/";
-			if(file_exists($path_folder)) mkdir($path_folder);
+			if(!file_exists($path_folder)) mkdir($path_folder);
 			$i = 0;
 			foreach ($additional_photos as $key => $photo_) {
 				if($photo_["name"] == null) continue;

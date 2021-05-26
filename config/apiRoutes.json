@@ -217,6 +217,7 @@
         "method" : "post",
         "controller" : "api",
         "function" : "new_order",
+        "auth": true,
         "fields": [
             "address",
             "delivery",

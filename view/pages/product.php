@@ -4,7 +4,7 @@
 			<?php if($SYS_LEVELACCESS == 0): ?>
 				<div class="section-path">
 					<a class="section" href="/admin/">Админ панель</a>
-					<a class="section" href="/admin/products/">Заказы</a>
+					<a class="section" href="/admin/products/">Продукты</a>
 					<a class="section" href="#"><?=$product['name']?></a>
 				</div>
 			<?php else: ?>
