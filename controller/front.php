@@ -63,7 +63,10 @@ function order($options){
 		$promocode = dbQueryOne("SELECT code, percent FROM promocode WHERE id = '{$query['promocode_id']}' AND active='y'");
 		$items = dbQuery("SELECT product.*, orders_product.count FROM orders_product, product WHERE orders_product.orders_id = '{$order_id}' AND product.id = orders_product.product_id");
 		load_view("order", "SHOP.d — Заказ#{$query['id']}", ["order" => $query, "items" => $items, "promocode" => $promocode]);
+		return;
 	}
+
+	load_error(404, "Заказ отсутствует");
 }
 
 // User profile (/profile/)

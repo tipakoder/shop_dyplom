@@ -37,6 +37,12 @@
 				<?php else: ?>
 					<div class="paid-success"><i class="far fa-check-circle"></i> Успешная оплата</div>
 				<?php endif; ?>
+
+				<?php if($order['end'] == 'n' && $SYS_LEVELACCESS == 0): ?>
+					<button class="btn filled" onclick="end_order(<?=$order['id']?>)">Закрыть заказ</button>
+				<?php else: ?>
+					<div class="paid-success gray">Заказ закрыт</div>
+				<?php endif; ?>
 			</div>
 
 			<div class="items-wrapper">

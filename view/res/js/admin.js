@@ -505,4 +505,30 @@ function product_edit(id){
     });
 }
 
+// ---------- ORDERS
+
+function end_order(id){
+	if(confirm("Вы действительно хотите закрыть заказ?")){
+		return;
+	}
+
+	let dataSend = new FormData();
+	dataSend.append("id", id);
+	fetch("/endOrder/", {
+	  	body: dataSend,
+        method: "POST"
+    }).then(async(res) => {
+        return await res.json();
+    }).then((data) => {
+        if(data.type == "error"){
+            alert(data.data);
+        } else {
+        	alert("Успешно!");
+        	location.href = "/admin/orders/";
+        }
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
 document.addEventListener("DOMContentLoaded", ready_admin);

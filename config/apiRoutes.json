@@ -226,5 +226,16 @@
             "phone",
             "items"
         ]
+    },
+
+    {
+        "url" : "/endOrder/",
+        "method" : "post",
+        "controller" : "api",
+        "function" : "end_order",
+        "level_access": 0,
+        "fields": [
+            "id"
+        ]
     }
 ]

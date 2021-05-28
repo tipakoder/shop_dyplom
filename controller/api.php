@@ -153,6 +153,17 @@ function new_order(){
 	send_answer(["order_id" => $order_id, "check" => ["id" => $check_id, "items" => $items_name, "price" => $total_price]], true);
 }
 
+function end_order(){
+	global $currentOptions, $currentUser;
+	$order_id = $currentOptions['id'];
+
+	if(dbExecute("UPDATE orders SET end = 'y' WHERE id = '{$order_id}'")){
+		send_answer([], true);
+	}
+
+	send_answer(["Неизвестная ошибка"]);
+}
+
 // ---------------------- ADMIN
 
 function new_promocode(){

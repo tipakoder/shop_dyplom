@@ -32,22 +32,3 @@
         </div>
     </div>
 </section>
-
-<!-- <section id="previously-watched" class="background">
-    <div class="container">
-        <div class="section-title">Ранее вы смотрели</div>
-        <div class="content">
-            <div class="hover-block">
-                <div class="inner-wrapper">
-                    <img src="/view/res/img/recently_watched.jpg" alt="" class="image">
-                    <div class="text">
-                        <h5 class="name">Худи</h5>
-                        <p class="price">2 399 руб./шт</p>
-                    </div>
-                </div>
-            </div>
-            <div class="block"></div>
-            <div class="block"></div>
-        </div>
-    </div>
-</section> -->
