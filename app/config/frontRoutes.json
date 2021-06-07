@@ -1,0 +1,101 @@
+[
+    {
+        "url" : "/",
+        "method" : "get",
+        "controller" : "Home",
+        "function" : "index"
+    },
+
+    {
+        "url" : "/cart/",
+        "method" : "get",
+        "controller" : "Home",
+        "function" : "cart"
+    },
+
+    {
+        "url" : "/favorite/",
+        "method" : "get",
+        "controller" : "Home",
+        "function" : "favorite"
+    },
+
+    {
+        "url" : "/search/",
+        "method" : "get",
+        "controller" : "Search",
+        "function" : "index"
+    },
+
+    {
+        "url" : "/product.(\\d+)/",
+        "method" : "get",
+        "controller" : "Product",
+        "function" : "index",
+        "regex": true
+    },
+
+    {
+        "url" : "/profile/",
+        "method" : "get",
+        "controller" : "Account",
+        "function" : "index",
+        "auth": true
+    },
+
+    {
+        "url" : "/logout/",
+        "method" : "get",
+        "controller" : "Account",
+        "function" : "logout",
+        "auth": true
+    },
+
+    {
+        "url" : "/admin/",
+        "method" : "get",
+        "controller" : "Admin",
+        "function" : "dashboard",
+        "level_access": 0
+    },
+
+    {
+        "url" : "/admin/products/",
+        "method" : "get",
+        "controller" : "Admin",
+        "function" : "products",
+        "level_access": 0
+    },
+
+    {
+        "url" : "/admin/orders/",
+        "method" : "get",
+        "controller" : "Admin",
+        "function" : "orders",
+        "level_access": 0
+    },
+
+    {
+        "url" : "/admin/promocodes/",
+        "method" : "get",
+        "controller" : "Admin",
+        "function" : "promocodes",
+        "level_access": 0
+    },
+
+    {
+        "url" : "/admin/delivery/",
+        "method" : "get",
+        "controller" : "Admin",
+        "function" : "delivery",
+        "level_access": 0
+    },
+
+    {
+        "url" : "/order.(\\d+)/",
+        "method" : "get",
+        "controller" : "Order",
+        "function" : "index",
+        "regex": true
+    }
+]

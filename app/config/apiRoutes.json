@@ -1,0 +1,245 @@
+[
+    {
+        "url" : "/auth/",
+        "method" : "post",
+        "controller" : "Account",
+        "function" : "auth",
+        "fields": [
+        	"login",
+        	"password"
+        ],
+        "auth": false
+    },
+
+    {
+        "url" : "/reg/",
+        "method" : "post",
+        "controller" : "Account",
+        "function" : "reg",
+        "fields": [
+            "name",
+            "email",
+            "telephone",
+            "login",
+        	"password"
+        ],
+        "auth": false
+    },
+
+    {
+        "url" : "/getAccount/",
+        "method" : "post",
+        "controller" : "Account",
+        "function" : "get",
+        "auth": true
+    },
+
+    {
+        "url" : "/editAccount/",
+        "method" : "post",
+        "controller" : "Account",
+        "function" : "edit",
+        "auth": true,
+        "fields": [
+            "name",
+            "email",
+            "telephone",
+            "login"
+        ]
+    },
+
+    {
+        "url" : "/changePassword/",
+        "method" : "post",
+        "controller" : "Account",
+        "function" : "changePassword",
+        "auth": true,
+        "fields": [
+            "oldpassword",
+            "newpassword"
+        ]
+    },
+
+    {
+        "url" : "/newPromocode/",
+        "method" : "post",
+        "controller" : "Promocode",
+        "function" : "create",
+        "level_access": 0,
+        "fields": [
+            "code",
+            "percent"
+        ]
+    },
+
+    {
+        "url" : "/turnPromocode/",
+        "method" : "post",
+        "controller" : "Promocode",
+        "function" : "turn",
+        "level_access": 0,
+        "fields": [
+            "id"
+        ]
+    },
+
+    {
+        "url" : "/newDeliveryService/",
+        "method" : "post",
+        "controller" : "Delivery",
+        "function" : "create",
+        "level_access": 0,
+        "fields": [
+            "name",
+            "title",
+            "min_price"
+        ]
+    },
+
+    {
+        "url" : "/removeDeliveryService/",
+        "method" : "post",
+        "controller" : "Delivery",
+        "function" : "remove",
+        "level_access": 0,
+        "fields": [
+            "id"
+        ]
+    },
+
+    {
+        "url" : "/getCategorys/",
+        "method" : "post",
+        "controller" : "Product",
+        "function" : "get_category"
+    },
+
+    {
+        "url" : "/getSubcategorys/",
+        "method" : "post",
+        "controller" : "Product",
+        "function" : "get_subcategory",
+        "fields": [
+            "id"
+        ]
+    },
+
+    {
+        "url" : "/newProduct/",
+        "method" : "post",
+        "controller" : "Product",
+        "function" : "create",
+        "level_access": 0,
+        "fields": [
+            "name",
+            "description",
+            "price",
+            "category",
+            "subcategory"
+        ]
+    },
+
+    {
+        "url" : "/productSaleOff/",
+        "method" : "post",
+        "controller" : "Product",
+        "function" : "sale_off",
+        "level_access": 0,
+        "fields": [
+            "id"
+        ]
+    },
+
+    {
+        "url" : "/productRemove/",
+        "method" : "post",
+        "controller" : "Product",
+        "function" : "remove",
+        "level_access": 0,
+        "fields": [
+            "id"
+        ]
+    },
+
+    {
+        "url" : "/productSearch/",
+        "method" : "post",
+        "controller" : "Product",
+        "function" : "search",
+        "fields": [
+            "query"
+        ]
+    },
+
+    {
+        "url" : "/productGet/",
+        "method" : "post",
+        "controller" : "Product",
+        "function" : "get",
+        "fields": [
+            "id"
+        ]
+    },
+
+    {
+        "url" : "/editProductGet/",
+        "method" : "post",
+        "controller" : "Product",
+        "function" : "edit_prepare",
+        "level_access": 0,
+        "fields": [
+            "id"
+        ]
+    },
+
+    {
+        "url" : "/editProductProcess/",
+        "method" : "post",
+        "controller" : "Product",
+        "function" : "edit",
+        "level_access": 0,
+        "fields": [
+            "id",
+            "name",
+            "description",
+            "price",
+            "category",
+            "subcategory"
+        ]
+    },
+
+    {
+        "url" : "/prepareNewOrder/",
+        "method" : "post",
+        "controller" : "Order",
+        "function" : "prepare_create",
+        "auth": true
+    },
+
+    {
+        "url" : "/newOrder/",
+        "method" : "post",
+        "controller" : "Order",
+        "function" : "create",
+        "auth": true,
+        "fields": [
+            "address",
+            "delivery",
+            "name",
+            "email",
+            "phone",
+            "items"
+        ]
+    },
+
+    {
+        "url" : "/endOrder/",
+        "method" : "post",
+        "controller" : "Order",
+        "function" : "end",
+        "level_access": 0,
+        "fields": [
+            "id"
+        ]
+    }
+]

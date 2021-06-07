@@ -1,1 +1,3 @@
-config/db.php
+/.idea/
+/app/config/db.php
+/vendor/

@@ -1,0 +1,33 @@
+/* Panton */
+@font-face{
+    font-family: "Panton";
+    font-style: normal;
+    font-weight: 400;
+    font-display: fallback;
+    src: url(/app/interface/res/fonts/panton/Panton-Regular.ttf) format("opentype"),
+         url(/app/interface/res/fonts/panton/Panton-Regular.woff) format("woff");
+}
+@font-face{
+    font-family: "Panton";
+    font-style: italic;
+    font-weight: 400;
+    font-display: fallback;
+    src: url(/app/interface/res/fonts/panton/Panton-RegularItalic.ttf) format("opentype"),
+         url(/app/interface/res/fonts/panton/Panton-RegularItalic.woff) format("woff");
+}
+@font-face{
+    font-family: "Panton";
+    font-style: normal;
+    font-weight: 600;
+    font-display: fallback;
+    src: url(/app/interface/res/fonts/panton/Panton-Bold.ttf) format("opentype"),
+         url(/app/interface/res/fonts/panton/Panton-Bold.woff) format("woff");
+}
+@font-face{
+    font-family: "Panton";
+    font-style: normal;
+    font-weight: 200;
+    font-display: fallback;
+    src: url(/app/interface/res/fonts/panton/Panton-Light.ttf) format("opentype"),
+         url(/app/interface/res/fonts/panton/Panton-Light.woff) format("woff");
+}
