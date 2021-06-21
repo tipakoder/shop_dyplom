@@ -21,7 +21,7 @@ class Router {
         $arrayExplode = explode("?", $_SERVER["REQUEST_URI"]);
         $temp_url_parts = array_shift($arrayExplode);
         // Удаляем слеш с начала и конца нашего URL (и для удалёнки добавляем приставку "shop/")
-        $this->currentUrl = "shop/" . trim($temp_url_parts, "/");
+        $this->currentUrl = trim($temp_url_parts, "/");
         // Получаем текущий метод запроса
         $this->currentMethod = strtolower($_SERVER["REQUEST_METHOD"]);
         // На основе метода запроса получаем отправленные данные
